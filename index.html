@@ -78,6 +78,74 @@
     transition: background 0.2s;
   }
   .header-contact:hover { background: #f5c842; }
+  .header-donate {
+    background: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .header-donate:hover { background: #1ea855; }
+  .header-paytabs {
+    background: var(--orange);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .header-paytabs:hover { background: #a84a0d; }
+  .donate-btn-paytabs {
+    width: 100%;
+    padding: 11px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .donate-btn-paytabs:hover { background: #a84a0d; }
+  .donate-btn-whatsapp {
+    width: 100%;
+    padding: 11px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .donate-btn-whatsapp:hover { background: #1ea855; }
 
   /* HERO */
   .hero {
@@ -465,9 +533,17 @@
         <div class="header-sub">Relief & Emergency Foundation · رقم تسجيل 638/2013</div>
       </div>
     </div>
-    <a href="mailto:info@reliefeg.org" class="header-contact">
-      📧 تواصل معنا
-    </a>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <a href="https://secure-egypt.paytabs.com/payment/page/50D7EA7D82E4D62BEDD785A73FFF7CF4562F5F813CCE08833CC7E189/start" target="_blank" class="header-paytabs">
+        💳 تبرع للمؤسسة
+      </a>
+      <a href="https://wa.me/201168851771?text=أريد%20التبرع%20للمؤسسة" target="_blank" class="header-donate">
+        💬 واتساب
+      </a>
+      <a href="mailto:info@reliefeg.org" class="header-contact">
+        📧 تواصل
+      </a>
+    </div>
   </div>
 </header>
 
@@ -727,9 +803,12 @@ function renderCases() {
         </div>
       </div>
       <div class="case-card-footer">
-        <button class="donate-btn" onclick="openDonorModal(${JSON.stringify(c).replace(/"/g, '&quot;')})">
-          💝 أريد التبرع لهذه الحالة
-        </button>
+        <a href="https://secure-egypt.paytabs.com/payment/page/50D7EA7D82E4D62BEDD785A73FFF7CF4562F5F813CCE08833CC7E189/start" target="_blank" class="donate-btn-paytabs">
+          💳 ادفع دلوقتي (PayTabs)
+        </a>
+        <a href="https://wa.me/201168851771?text=${encodeURIComponent(`أريد التبرع للحالة:\nالكود: ${c.code}\nالخدمة: ${c.service}\nالمحافظة: ${c.gov}\nالمبلغ المطلوب: ${c.budget || 'يرجى الاستفسار'}`)}" target="_blank" class="donate-btn-whatsapp">
+          💬 تواصل واتساب مع تفاصيل الحالة
+        </a>
       </div>
     </div>`;
   }).join('');
