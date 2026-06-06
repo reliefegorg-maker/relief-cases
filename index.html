@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مؤسسة الإغاثة والطوارئ — حالات تحتاج دعمك</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1F4E79;
+    --primary-light: #2563a8;
+    --teal: #0F6E56;
+    --orange: #C55A11;
+    --accent: #e8a020;
+    --bg: #f0f4f8;
+    --white: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(26,58,92,0.10);
+    --shadow-lg: 0 8px 40px rgba(26,58,92,0.18);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    direction: rtl;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0f2440 100%);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-logo {
+    width: 48px; height: 48px;
+    background: var(--accent);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 900;
+    color: var(--primary);
+  }
+  .header-title { font-size: 18px; font-weight: 800; }
+  .header-sub { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+  .header-contact {
+    background: var(--accent);
+    color: var(--primary);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .header-contact:hover { background: #f5c842; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+    color: white;
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .hero p {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-stat-label { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+
+  /* FILTERS */
+  .filters-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 80px;
+    z-index: 90;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .filters-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .filter-label { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+  .filter-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .search-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 9px 40px 9px 16px;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    outline: none;
+    direction: rtl;
+    transition: border 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--primary); }
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* LOADING */
+  .loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-muted);
+  }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 4px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* CASES GRID */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* CASE CARD */
+  .case-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+  .case-card-top {
+    padding: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .case-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .icon-roof { background: #dbeafe; }
+  .icon-water { background: #d1fae5; }
+  .icon-project { background: #ede9fe; }
+  .icon-food { background: #fef3c7; }
+  .icon-other { background: #f1f5f9; }
+
+  .case-code {
+    font-family: monospace;
+    font-size: 11px;
+    background: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 8px;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .case-card-body { padding: 16px 20px; flex: 1; }
+  .case-service {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .case-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .case-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .case-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .case-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .case-card-footer { padding: 0 20px 20px; }
+  .donate-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .donate-btn:hover { background: var(--primary-light); }
+  .donate-btn.orange { background: var(--orange); }
+  .donate-btn.orange:hover { background: #a84a0d; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--teal));
+    color: white;
+    padding: 24px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .modal-title { font-size: 18px; font-weight: 800; }
+  .modal-subtitle { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+  .modal-close {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.25); }
+  .modal-body { padding: 24px; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-label { font-size: 13px; font-weight: 700; margin-bottom: 6px; display: block; }
+  .form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    outline: none;
+    direction: rtl;
+    transition: border 0.2s;
+  }
+  .form-input:focus { border-color: var(--primary); }
+  .form-note {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--teal);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  .btn-outline {
+    padding: 10px 20px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .btn-primary {
+    padding: 10px 24px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .btn-primary:hover { background: var(--primary-light); }
+
+  /* SUCCESS */
+  .success-msg {
+    text-align: center;
+    padding: 32px;
+  }
+  .success-icon { font-size: 56px; margin-bottom: 16px; }
+  .success-title { font-size: 20px; font-weight: 800; color: var(--teal); margin-bottom: 8px; }
+  .success-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  /* EMPTY */
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    grid-column: 1 / -1;
+  }
+  .empty-icon { font-size: 56px; margin-bottom: 16px; }
+  .empty-title { font-size: 18px; font-weight: 700; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--primary);
+    color: white;
+    padding: 32px 24px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  footer p { font-size: 13px; opacity: 0.7; margin-top: 8px; }
+
+  /* RESPONSIVE */
+  @media(max-width: 900px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width: 600px) {
+    .cases-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+    .hero-stats { gap: 24px; }
+    .filters-inner { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo">إط</div>
+      <div>
+        <div class="header-title">مؤسسة الإغاثة والطوارئ</div>
+        <div class="header-sub">Relief & Emergency Foundation · رقم تسجيل 638/2013</div>
+      </div>
+    </div>
+    <a href="mailto:info@reliefeg.org" class="header-contact">
+      📧 تواصل معنا
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>❤️ كن سبباً في تغيير حياة أسرة</h1>
+  <p>نعمل مع الجمعيات الشريكة لتقديم خدمات الإسكان والمياه والمشاريع الصغيرة للأسر الأكثر احتياجاً في محافظات مصر.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="statTotal">—</span>
+      <div class="hero-stat-label">حالة تم دعمها</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="statActive">—</span>
+      <div class="hero-stat-label">حالة تحتاج دعم الآن</div>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="statGovs">—</span>
+      <div class="hero-stat-label">محافظة مستهدفة</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">تصفية:</span>
+    <button class="filter-btn active" onclick="filterCases('all', this)">الكل</button>
+    <button class="filter-btn" onclick="filterCases('سقف', this)">🏠 سقف</button>
+    <button class="filter-btn" onclick="filterCases('وصلة مياه', this)">💧 وصلة مياه</button>
+    <button class="filter-btn" onclick="filterCases('مشروع صغير', this)">🏗️ مشروع صغير</button>
+    <button class="filter-btn" onclick="filterCases('إعمار', this)">🏛️ إعمار</button>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="بحث بالمحافظة أو نوع الخدمة..." oninput="renderCases()">
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div id="loadingState" class="loading">
+    <div class="spinner"></div>
+    <div>جاري تحميل الحالات...</div>
+  </div>
+  <div class="cases-grid" id="casesGrid" style="display:none"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-size:18px;font-weight:800;margin-bottom:8px">مؤسسة الإغاثة والطوارئ</div>
+  <p>رقم التسجيل: 638/2013 · القانون 149/2019 · المقطم، القاهرة</p>
+  <p style="margin-top:12px">📧 info@reliefeg.org · 📞 01168851771</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="donorModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle">التبرع للحالة</div>
+        <div class="modal-subtitle" id="modalCode"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="form-note">
+        ✅ بعد إرسال بياناتك، سيتواصل معك فريقنا خلال 24 ساعة على تليفونك أو إيميلك ويبعتلك كل تفاصيل الحالة والمستندات.
+      </div>
+      <div class="form-group">
+        <label class="form-label">اسمك الكريم *</label>
+        <input type="text" class="form-input" id="donorName" placeholder="الاسم الكامل">
+      </div>
+      <div class="form-group">
+        <label class="form-label">رقم التليفون *</label>
+        <input type="text" class="form-input" id="donorPhone" placeholder="01xxxxxxxxx">
+      </div>
+      <div class="form-group">
+        <label class="form-label">البريد الإلكتروني</label>
+        <input type="email" class="form-input" id="donorEmail" placeholder="example@email.com" style="direction:ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ملاحظات</label>
+        <input type="text" class="form-input" id="donorNote" placeholder="أي ملاحظات أو استفسارات...">
+      </div>
+    </div>
+    <div class="modal-footer" id="modalFooter">
+      <button class="btn-outline" onclick="closeModal()">إلغاء</button>
+      <button class="btn-primary" onclick="submitDonor()">💝 أريد التبرع لهذه الحالة</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Sheet ID
+const SHEET_ID = '1weYv83jXrHomGMeR_1rDXE_vn8nziBCP8VHDRho2oaU';
+const SHEET_NAME = 'ردود النموذج 1';
+
+let allCases = [];
+let currentFilter = 'all';
+let selectedCase = null;
+
+// Column indices (0-based) — based on the form structure
+// Adjust these based on actual sheet columns
+const COL = {
+  timestamp: 0,
+  email: 1,
+  partner: 3,        // اسم الجمعية
+  coordinator: 4,    // اسم المنسق
+  phone: 5,          // تليفون المنسق
+  name: 6,           // اسم الحالة
+  spouse: 7,         // اسم الزوج/الزوجة
+  gender: 8,         // الجنس
+  status: 9,         // الحالة الاجتماعية
+  casePhone: 10,     // تليفون الحالة
+  nid: 11,           // رقم البطاقة
+  family: 12,        // عدد الأسرة
+  work: 13,          // العمل
+  gov: 14,           // المحافظة (index based on form order)
+  center: 15,        // المركز
+  village: 16,       // القرية
+  address: 17,       // العنوان
+  service: 18,       // نوع الخدمة (adjusted)
+  houseDesc: 19,     // وصف المنزل
+  intervention: 20,  // التدخل المطلوب
+  story: 21,         // النص النثري
+  docs: 22,          // الأوراق جاهزة
+  photos: 23,        // صور وفيديو
+  quote: 24,         // مقايسة
+  driveLink: 25,     // لينك Drive
+  notes: 26,         // ملاحظات
+  code: 27,          // الكود (AA)
+  stage: 38,         // المرحلة الحالية (AL)
+  approvedBudget: 24, // المبلغ المعتمد (AE)
+};
+
+const SERVICE_ICONS = {
+  'سقف': '🏠',
+  'وصلة مياه': '💧',
+  'مشروع صغير': '🏗️',
+  'إعمار': '🏛️',
+  'ترميم': '🔨',
+  'مواد غذائية': '📦',
+  'أخرى': '🔧',
+};
+
+const SERVICE_ICON_CLASS = {
+  'سقف': 'icon-roof',
+  'وصلة مياه': 'icon-water',
+  'مشروع صغير': 'icon-project',
+  'مواد غذائية': 'icon-food',
+};
+
+// Fetch data from Google Sheets
+async function fetchCases() {
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.substring(47, text.length - 2));
+    const rows = json.table.rows;
+
+    allCases = rows
+      .map((row, i) => {
+        const c = row.c;
+        const get = (idx) => c[idx] && c[idx].v !== null ? String(c[idx].v) : '';
+        return {
+          rowNum: i + 2,
+          code: get(26),
+          name: get(6),
+          gov: get(13) || get(9),
+          service: get(17) || get(7),
+          story: get(20) || get(19),
+          intervention: get(19) || '',
+          family: get(11),
+          partner: get(3),
+          stage: get(37) || get(38) || '',
+          budget: get(23) || '',
+        };
+      })
+      .filter(c => {
+        const stage = c.stage.trim();
+        // Show cases that are approved or ready for funding
+        return stage === 'معتمد' || stage === 'جاهز للتمويل' || stage === 'مقترح' || c.code;
+      });
+
+    updateStats();
+    renderCases();
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('casesGrid').style.display = 'grid';
+
+  } catch(err) {
+    document.getElementById('loadingState').innerHTML = `
+      <div class="empty-icon">⚠️</div>
+      <div style="font-size:16px;font-weight:700;color:#dc2626">تعذر تحميل البيانات</div>
+      <div style="font-size:13px;color:#64748b;margin-top:8px">يرجى التواصل معنا مباشرة على info@reliefeg.org</div>
+    `;
+  }
+}
+
+function updateStats() {
+  document.getElementById('statTotal').textContent = allCases.length;
+  document.getElementById('statActive').textContent = allCases.filter(c => c.stage !== 'مغلق').length;
+  const govs = new Set(allCases.map(c => c.gov).filter(Boolean));
+  document.getElementById('statGovs').textContent = govs.size || '—';
+}
+
+function filterCases(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCases();
+}
+
+function renderCases() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const grid = document.getElementById('casesGrid');
+
+  let filtered = allCases.filter(c => {
+    const typeOk = currentFilter === 'all' || (c.service && c.service.includes(currentFilter));
+    const searchOk = !search ||
+      (c.gov && c.gov.toLowerCase().includes(search)) ||
+      (c.service && c.service.toLowerCase().includes(search)) ||
+      (c.code && c.code.toLowerCase().includes(search));
+    return typeOk && searchOk;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <div class="empty-title">لا توجد حالات مطابقة</div>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((c, i) => {
+    const icon = SERVICE_ICONS[c.service] || '🏠';
+    const iconClass = SERVICE_ICON_CLASS[c.service] || 'icon-other';
+    const story = c.story || c.intervention || 'أسرة تحتاج إلى دعمك للحصول على مسكن لائق وحياة كريمة.';
+    const storyShort = story.length > 120 ? story.substring(0, 120) + '...' : story;
+
+    return `
+    <div class="case-card" style="animation-delay:${i * 0.05}s">
+      <div class="case-card-top">
+        <div class="case-icon ${iconClass}">${icon}</div>
+        ${c.code ? `<span class="case-code">${c.code}</span>` : ''}
+      </div>
+      <div class="case-card-body">
+        <div class="case-service">${c.service || 'خدمة إغاثية'}</div>
+        <div class="case-title">${c.service || 'حالة'} · ${c.gov || 'محافظة'}</div>
+        <div class="case-desc">${storyShort}</div>
+        <div class="case-meta">
+          ${c.gov ? `<div class="case-meta-item">📍 ${c.gov}</div>` : ''}
+          ${c.family ? `<div class="case-meta-item">👨‍👩‍👧 ${c.family} أفراد</div>` : ''}
+          ${c.partner ? `<div class="case-meta-item">🤝 ${c.partner}</div>` : ''}
+        </div>
+      </div>
+      <div class="case-card-footer">
+        <button class="donate-btn" onclick="openDonorModal(${JSON.stringify(c).replace(/"/g, '&quot;')})">
+          💝 أريد التبرع لهذه الحالة
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// MODAL
+function openDonorModal(c) {
+  selectedCase = c;
+  document.getElementById('modalTitle').textContent = `${c.service || 'حالة'} · ${c.gov || ''}`;
+  document.getElementById('modalCode').textContent = c.code || '';
+  document.getElementById('modalBody').style.display = 'block';
+  document.getElementById('modalFooter').style.display = 'flex';
+
+  // Reset form
+  ['donorName','donorPhone','donorEmail','donorNote'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  document.getElementById('donorModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('donorModal').classList.remove('open');
+  selectedCase = null;
+}
+
+function submitDonor() {
+  const name = document.getElementById('donorName').value.trim();
+  const phone = document.getElementById('donorPhone').value.trim();
+
+  if (!name || !phone) {
+    alert('يرجى إدخال الاسم ورقم التليفون');
+    return;
+  }
+
+  // Build mailto link
+  const caseInfo = selectedCase ? `الكود: ${selectedCase.code} | الخدمة: ${selectedCase.service} | المحافظة: ${selectedCase.gov}` : '';
+  const subject = encodeURIComponent(`طلب تبرع - ${selectedCase?.service || 'حالة'} - ${selectedCase?.gov || ''}`);
+  const body = encodeURIComponent(`السادة مؤسسة الإغاثة والطوارئ،
+
+أرغب في التبرع للحالة التالية:
+${caseInfo}
+
+بيانات المتبرع:
+الاسم: ${name}
+التليفون: ${phone}
+الإيميل: ${document.getElementById('donorEmail').value}
+ملاحظات: ${document.getElementById('donorNote').value}
+
+أرجو التواصل معي لاستكمال إجراءات التبرع.
+
+مع تحياتي`);
+
+  // Show success
+  document.getElementById('modalBody').innerHTML = `
+    <div class="success-msg">
+      <div class="success-icon">✅</div>
+      <div class="success-title">شكراً لك على تبرعك الكريم!</div>
+      <div class="success-text">
+        سيتواصل معك فريق مؤسسة الإغاثة والطوارئ خلال 24 ساعة على رقم <strong>${phone}</strong>
+        لإرسال كل تفاصيل الحالة والمستندات وإتمام إجراءات التبرع.
+        <br><br>
+        أو يمكنك التواصل معنا مباشرة على:
+        <br>📧 info@reliefeg.org
+        <br>📞 01168851771
+      </div>
+    </div>
+  `;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn-primary" onclick="window.open('mailto:info@reliefeg.org?subject=${subject}&body=${body}')">📧 إرسال بريد إلكتروني</button>
+    <button class="btn-outline" onclick="closeModal()">إغلاق</button>
+  `;
+}
+
+// Click outside to close
+document.getElementById('donorModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Init
+fetchCases();
+</script>
+</body>
+</html>
