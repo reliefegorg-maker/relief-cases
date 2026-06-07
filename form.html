@@ -21,7 +21,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .header-logo {
-            max-height: 70px;
+            max-height: 80px;
             width: auto;
             margin-bottom: 10px;
         }
@@ -91,7 +91,7 @@
 
     <header class="app-header text-center">
         <div class="container">
-            <img src="https://reliefeg.org/images/logo.png" alt="شعار مؤسسة الإغاثة والطوارئ" class="header-logo" onerror="this.src='https://reliefeg.org/assets/images/logo.png'; this.onerror=null;">
+            <img src="https://i.ibb.co/6w4g70M/relief-logo.png" alt="شعار مؤسسة الإغاثة والطوارئ" class="header-logo">
             <h2 class="fw-bold m-0">استمارة تسجيل حالة جديدة</h2>
             <p class="text-white-50 m-0 mt-2">خاص بالجمعيات الشريكة والمنسقين الميدانيين بالمحافظات</p>
         </div>
@@ -303,7 +303,6 @@
     </div>
 
     <script>
-        // ⚠️ لا تنسى استبدال الرابط التخيلي التالي برابط الـ Web App (Deploy) الحقيقي الخاص بك لتفعيل الإرسال
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec";
 
         document.getElementById('caseForm').addEventListener('submit', function(e) {
@@ -357,7 +356,6 @@
                 body: JSON.stringify(formData)
             })
             .then(response => {
-                // إظهار رسالة النجاح وتصفير الاستمارة
                 successAlert.style.display = "block";
                 document.getElementById('caseForm').reset();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -367,7 +365,6 @@
                 console.error('Error:', error);
             })
             .finally(() => {
-                // إلغاء حالة التحميل للزر
                 submitBtn.disabled = false;
                 btnText.classList.remove('d-none');
                 btnSpinner.classList.add('d-none');
