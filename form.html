@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الجمعيات الشريكة - مؤسسة الإغاثة والطوارئ</title>
+    <title>استمارة تسجيل حالة جديدة - مؤسسة الإغاثة والطوارئ</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,411 +20,359 @@
             padding: 20px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .logo-badge {
-            background-color: #f39c12;
-            color: #0f2d4a;
-            font-weight: 700;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 1.4rem;
-            display: inline-block;
-            margin-left: 10px;
-        }
-        .brand-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-            display: inline-block;
-            vertical-align: middle;
+        .header-logo {
+            max-height: 70px;
+            width: auto;
+            margin-bottom: 10px;
         }
         .form-container {
-            background: #ffffff;
+            background: white;
+            padding: 40px;
             border-radius: 16px;
-            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.05);
-            padding: 35px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
             margin-top: -30px;
-            margin-bottom: 60px;
-            border-top: 5px solid #0f9d58;
+            margin-bottom: 50px;
+            border-top: 6px solid #00a859; /* الخط الأخضر المميز للمؤسسة */
         }
         .section-badge {
-            background-color: #eef2f7;
-            color: #0f2d4a;
-            font-weight: 700;
+            background-color: #0f2d4a;
+            color: white;
             padding: 8px 16px;
             border-radius: 30px;
-            margin-top: 25px;
-            margin-bottom: 20px;
-            font-size: 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             display: inline-block;
-            border-right: 4px solid #0f9d58;
+            margin-bottom: 25px;
+            margin-top: 15px;
         }
         .form-label {
             font-weight: 600;
             color: #334e68;
             font-size: 0.95rem;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .form-control, .form-select {
+            border: 2px solid #dae1e7;
             border-radius: 8px;
-            border: 1px solid #bcccdc;
-            padding: 10px 14px;
+            padding: 10px 15px;
             font-size: 0.95rem;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
         }
         .form-control:focus, .form-select:focus {
             border-color: #0f2d4a;
-            box-shadow: 0 0 0 4px rgba(15, 45, 74, 0.1);
+            box-shadow: 0 0 0 3px rgba(15, 45, 74, 0.1);
         }
         .btn-submit {
-            background-color: #0f9d58;
+            background-color: #00a859;
             color: white;
             font-weight: 700;
-            padding: 14px 40px;
+            padding: 12px 35px;
             border-radius: 8px;
             border: none;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(15, 157, 88, 0.2);
         }
         .btn-submit:hover {
-            background-color: #0b7b44;
-            color: white;
+            background-color: #008f4c;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(15, 157, 88, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 168, 89, 0.3);
         }
-        /* واجهة الانتظار */
-        .loading-overlay {
+        /* تنبيهات النجاح والفشل */
+        .alert-custom {
             display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 45, 74, 0.9);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-        }
-        .protection-box {
-            background-color: #f0fff4;
-            border-right: 4px solid #38a169;
+            border-radius: 8px;
             padding: 15px;
-            border-radius: 6px;
-            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loadingOverlay">
-    <div class="spinner-border text-warning" role="status" style="width: 3.5rem; height: 3.5rem;"></div>
-    <h4 class="mt-4 font-weight-bold">جاري رفع البيانات وتوليد كود الحالة الموحد...</h4>
-    <p class="text-light-50">برجاء عدم إغلاق الصفحة</p>
-</div>
-
-<header class="app-header text-center text-md-start">
-    <div class="container d-md-flex align-items-center justify-content-between">
-        <div>
-            <div class="logo-badge">إط</div>
-            <h1 class="brand-title">مؤسسة الإغاثة والطوارئ</h1>
+    <header class="app-header text-center">
+        <div class="container">
+            <img src="https://reliefeg.org/images/logo.png" alt="شعار مؤسسة الإغاثة والطوارئ" class="header-logo" onerror="this.src='https://reliefeg.org/assets/images/logo.png'; this.onerror=null;">
+            <h2 class="fw-bold m-0">استمارة تسجيل حالة جديدة</h2>
+            <p class="text-white-50 m-0 mt-2">خاص بالجمعيات الشريكة والمنسقين الميدانيين بالمحافظات</p>
         </div>
-        <div class="text-white-50 mt-2 mt-md-0 font-weight-bold">
-            <i class="fa-solid fa-laptop-code me-2"></i> منظومة تسجيل وبحث الحالات الميدانية
-        </div>
-    </div>
-</header>
+    </header>
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-xl-10">
-            
-            <div class="form-container">
-                <div class="text-center mb-4">
-                    <h3 class="fw-bold" style="color: #0f2d4a;">استمارة تسجيل حالة جديدة</h3>
-                    <p class="text-muted">خاص بالجمعيات الشريكة والمنسقين الميدانيين بالمحافظات</p>
-                </div>
-
-                <form id="caseForm">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="form-container">
                     
-                    <div>
-                        <span class="section-badge"><i class="fa-solid fa-handshake me-2"></i> بيانات الجمعية الشريكة والمسؤول</span>
+                    <div id="successAlert" class="alert alert-success alert-custom text-center">
+                        <i class="fa-solid fa-circle-check me-2"></i> تم إرسال بيانات الحالة بنجاح وجاري مراجعتها وتوليد الكود!
                     </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">البريد الإلكتروني للجمعية *</label>
-                            <input type="email" id="email" class="form-control" placeholder="example@gmail.com" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">اسم الجمعية الشريكة بالكامل *</label>
-                            <input type="text" id="partner" class="form-control" placeholder="اكتب اسم الجمعية" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">اسم المنسق المسؤول *</label>
-                            <input type="text" id="coordinator" class="form-control" placeholder="اسم الباحث أو المنسق" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">رقم هاتف المنسق *</label>
-                            <input type="tel" id="coordPhone" class="form-control" placeholder="01xxxxxxxxx" required>
-                        </div>
+                    <div id="errorAlert" class="alert alert-danger alert-custom text-center">
+                        <i class="fa-solid fa-circle-exclamation me-2"></i> حدث خطأ أثناء إرسال البيانات، يرجى المحاولة مرة أخرى.
                     </div>
 
-                    <div>
-                        <span class="section-badge"><i class="fa-solid fa-user me-2"></i> البيانات الأساسية للمستهدف (البحث الاجتماعي)</span>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">اسم الحالة رباعي *</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">اسم الزوج / الزوجة (إن وجد)</label>
-                            <input type="text" id="spouse" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">النوع *</label>
-                            <select id="gender" class="form-select" required>
-                                <option value="">اختر...</option>
-                                <option value="ذكر">ذكر</option>
-                                <option value="أنثى">أنثى</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">الحالة الاجتماعية *</label>
-                            <input type="text" id="socialStatus" class="form-control" placeholder="أرمل، يعول، مطلق..." required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">رقم هاتف الحالة *</label>
-                            <input type="tel" id="casePhone" class="form-control" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">الرقم القومي للحالة (14 رقم) *</label>
-                            <input type="text" id="nid" class="form-control" maxlength="14" pattern="\d{14}" placeholder="29xxxxxxxxxxxx" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">عدد أفراد الأسرة *</label>
-                            <input type="number" id="family" class="form-control" min="1" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">طبيعة عمل العائل / الوظيفة *</label>
-                            <input type="text" id="work" class="form-control" placeholder="عامل حر، بدون عمل، باليومية..." required>
-                        </div>
-                    </div>
-
-                    <div>
-                        <span class="section-badge"><i class="fa-solid fa-map-location-dot me-2"></i> بيانات السكن والنطاق الجغرافي</span>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <label class="form-label">المحافظة *</label>
-                            <select id="gov" class="form-select" required>
-                                <option value="">اختر المحافظة...</option>
-                                <option value="القاهرة">القاهرة</option><option value="الجيزة">الجيزة</option><option value="الإسكندرية">الإسكندرية</option><option value="الفيوم">الفيوم</option><option value="بني سويف">بني سويف</option><option value="المنيا">المنيا</option><option value="سوهاج">سوهاج</option><option value="قنا">قنا</option><option value="الأقصر">الأقصر</option><option value="أسوان">أسوان</option><option value="أسيوط">أسيوط</option><option value="الشرقية">الشرقية</option><option value="الدقهلية">الدقهلية</option><option value="البحيرة">البحيرة</option><option value="الغربية">الغربية</option><option value="المنوفية">المنوفية</option><option value="القليوبية">القليوبية</option><option value="كفر الشيخ">كفر الشيخ</option><option value="دمياط">دمياط</option><option value="بورسعيد">بورسعيد</option><option value="الإسماعيلية">الإسماعيلية</option><option value="السويس">السويس</option><option value="شمال سيناء">شمال سيناء</option><option value="جنوب سيناء">جنوب سيناء</option><option value="البحر الأحمر">البحر الأحمر</option><option value="الوادي الجديد">الوادي الجديد</option><option value="مطروح">مطروح</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">المركز / الحي *</label>
-                            <input type="text" id="center" class="form-control" required>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">القرية / المنطقة *</label>
-                            <input type="text" id="village" class="form-control" required>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">العنوان بالتفصيل *</label>
-                            <input type="text" id="address" class="form-control" required>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">وصف المنزل والبيئة المحيطة (الحوائط، الأسقف، الخدمات) *</label>
-                            <textarea id="houseDesc" class="form-control" rows="2" placeholder="اكتب تفاصيل حالة جدران وسقف المنزل والأثاث..." required></textarea>
-                        </div>
-                    </div>
-
-                    <div>
-                        <span class="section-badge"><i class="fa-solid fa-hand-holding-heart me-2"></i> نوع التدخل والدمج والحماية</span>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">نوع الخدمة المطلوبة للحالة *</label>
-                            <select id="service" class="form-select" required>
-                                <option value="">اختر الخدمة...</option>
-                                <option value="مشروع صغير">مشروع صغير (SP)</option>
-                                <option value="إعمار">إعمار وتجهيز منزل (EM)</option>
-                                <option value="مساعدات عامة">مساعدات أخرى / عامة (RE)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">التدخل المطلوب ونوعه بالتفصيل *</label>
-                            <input type="text" id="intervention" class="form-control" placeholder="مثال: إنشاء مشروع بقالة، تركيب سقف خرساني وغرفة..." required>
-                        </div>
+                    <form id="caseForm">
                         
-                        <div class="col-12">
-                            <label class="form-label text-primary fw-bold">♿ لضمان الإتاحة والدمج: هل يعاني المستهدف أو أحد أفراد أسرته من إعاقة حركية أو صعوبة تنقل تتطلب تهيئة هندسية خاصة؟ *</label>
-                            <select id="hasAccessibility" class="form-select" onchange="toggleAccessibilityDetails()" style="background-color: #f7fafc; border-color: #3182ce;" required>
-                                <option value="لا">لا، لا توجد احتياجات تيسيرية حركية معينة</option>
-                                <option value="نعم">نعم، توجد احتياجات أو تحديات حركية للمستهدف أو أسرته</option>
-                            </select>
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-handshake me-2"></i> بيانات الجمعية الشريكة والمسؤول</span>
                         </div>
-                        <div class="col-12" id="accessibilityDetailsDiv" style="display: none;">
-                            <label class="form-label fw-bold">يرجى توضيح الدعم المطلوب لتسهيل حركته وحمايته (مثال: ممر مائل، تجهيز حمام خاص، إلخ):</label>
-                            <input type="text" id="accessibilityDetails" class="form-control" placeholder="مثال: تهيئة مدخل المحل أو المنزل لكرسي متحرك">
-                            <div class="protection-box">
-                                <p class="m-0 text-success small"><i class="fa-solid fa-shield-halved me-1"></i> معلومات حماية الخصوصية: يتم معالجة هذه البيانات بشكل آمن لضمان تقديم الدعم الهندسي اللوجستي المناسب للحالة فقط.</p>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">البريد الإلكتروني للجمعية *</label>
+                                <input type="email" id="email" class="form-control" placeholder="example@gmail.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">اسم الجمعية الشريكة بالكامل *</label>
+                                <input type="text" id="partner" class="form-control" placeholder="اكتب اسم الجمعية" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">اسم المنسق المسؤول *</label>
+                                <input type="text" id="coordinator" class="form-control" placeholder="اسم الباحث أو المنسق" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم هاتف المنسق *</label>
+                                <input type="tel" id="coordPhone" class="form-control" placeholder="01xxxxxxxxx" required>
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <label class="form-label">قصة الحالة بالتفصيل والوضع الاقتصادي والاجتماعي الحالي *</label>
-                            <textarea id="story" class="form-control" rows="4" placeholder="اكتب بالتفصيل قصة الحالة وأسباب الاحتياج وعائد التدخل عليهم..." required></textarea>
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-user me-2"></i> البيانات الأساسية للمستهدف (البحث الاجتماعي)</span>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">الميزانية التقديرية / التكلفة الكلية (بالجنيه) *</label>
-                            <input type="number" id="budget" class="form-control" min="0" placeholder="0.00" required>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">اسم الحالة المستهدفة ثلاثي أو رباعي كما في البطاقة *</label>
+                                <input type="text" id="caseName" class="form-control" placeholder="اكتب اسم الحالة المستهدفة" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">اسم الزوج / الزوجة</label>
+                                <input type="text" id="spouseName" class="form-control" placeholder="اكتب اسم الزوج أو الزوجة إن وجد">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الجنس *</label>
+                                <select id="gender" class="form-select" required>
+                                    <option value="" disabled selected>اختر الجنس</option>
+                                    <option value="ذكر">ذكر</option>
+                                    <option value="أنثى">أنثى</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الحالة الاجتماعية *</label>
+                                <select id="socialStatus" class="form-select" required>
+                                    <option value="" disabled selected>اختر الحالة الاجتماعية</option>
+                                    <option value="أرملة">أرملة</option>
+                                    <option value="مطلقة">مطلقة</option>
+                                    <option value="أسرة فقيرة">أسرة فقيرة</option>
+                                    <option value="امرأة معيلة">امرأة معيلة</option>
+                                    <option value="أيتام">أيتام</option>
+                                    <option value="عجز تام">عجز تام</option>
+                                    <option value="مرضى">مرضى</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم هاتف الحالة المستهدفة للاتصال والتأكد *</label>
+                                <input type="tel" id="casePhone" class="form-control" placeholder="01xxxxxxxxx" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الرقم القومي للحالة المستهدفة المكون من 14 رقم *</label>
+                                <input type="text" id="nationalId" class="form-control" placeholder="2xxxxxxxxxxxxx" maxlength="14" minlength="14" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">عدد أفراد الأسرة المقيمين مع الحالة *</label>
+                                <input type="number" id="familyCount" class="form-control" placeholder="اكتب عدد الأفراد" min="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">عمل العائل الأساسي للحالة والوظيفة الحالية *</label>
+                                <input type="text" id="job" class="form-control" placeholder="مثال: عامل باليومية / لا يعمل" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <span class="section-badge"><i class="fa-solid fa-folder-open me-2"></i> المستندات الحية والمرفقات الرقمية</span>
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">الأوراق الرسمية كاملة وجاهزة؟ *</label>
-                            <select id="docsReady" class="form-select" required>
-                                <option value="نعم">نعم</option>
-                                <option value="لا">لا</option>
-                            </select>
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-map-location-dot me-2"></i> النطاق الجغرافي والعنوان بالتفصيل</span>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">المقايسة الفنية للمشروع جاهزة؟ *</label>
-                            <select id="quotationReady" class="form-select" required>
-                                <option value="نعم">نعم</option>
-                                <option value="لا">لا</option>
-                                <option value="غير مطلوب لهذه الخدمة">غير مطلوب لهذه الخدمة</option>
-                            </select>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label">المحافظة *</label>
+                                <select id="governorate" class="form-select" required>
+                                    <option value="" disabled selected>اختر المحافظة</option>
+                                    <option value="القاهرة">القاهرة</option>
+                                    <option value="الجيزة">الجيزة</option>
+                                    <option value="القليوبية">القليوبية</option>
+                                    <option value="المنوفية">المنوفية</option>
+                                    <option value="بني سويف">بني سويف</option>
+                                    <option value="الفيوم">الفيوم</option>
+                                    <option value="المنيا">المنيا</option>
+                                    <option value="أسيوط">أسيوط</option>
+                                    <option value="سوهاج">سوهاج</option>
+                                    <option value="قنا">قنا</option>
+                                    <option value="الأقصر">الأقصر</option>
+                                    <option value="أسوان">أسوان</option>
+                                    <option value="البحيرة">البحيرة</option>
+                                    <option value="الشرقية">الشرقية</option>
+                                    <option value="الدقهلية">الدقهلية</option>
+                                    <option value="الغربية">الغربية</option>
+                                    <option value="دمياط">دمياط</option>
+                                    <option value="بورسعيد">بورسعيد</option>
+                                    <option value="الإسماعيلية">الإسماعيلية</option>
+                                    <option value="السويس">السويس</option>
+                                    <option value="كفر الشيخ">كفر الشيخ</option>
+                                    <option value="مطروح">مطروح</option>
+                                    <option value="الوادي الجديد">الوادي الجديد</option>
+                                    <option value="البحر الأحمر">البحر الأحمر</option>
+                                    <option value="شمال سيناء">شمال سيناء</option>
+                                    <option value="جنوب سيناء">جنوب سيناء</option>
+                                    <option value="الإسكندرية">الإسكندرية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">المركز / البندر التابع له الحالة *</label>
+                                <input type="text" id="center" class="form-control" placeholder="اكتب اسم المركز أو المدينة" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">القرية / النجوع / الحي التابع للحالة *</label>
+                                <input type="text" id="village" class="form-control" placeholder="اكتب اسم القرية أو الحي" required>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">الصور الميدانية للمنزل/الموقع جاهزة؟ *</label>
-                            <select id="photosReady" class="form-select" required>
-                                <option value="نعم">نعم</option>
-                                <option value="لا">لا</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">رابط فولدر Google Drive الشامل للمستندات والصور *</label>
-                            <input type="url" id="driveLink" class="form-control" placeholder="https://drive.google.com/drive/folders/..." required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">رابط ملف المقايسة المنفصل (إن وجد)</label>
-                            <input type="url" id="quotationLink" class="form-control" placeholder="https://...">
-                        </div>
-                    </div>
 
-                    <div class="text-center mt-5">
-                        <button type="submit" class="btn-submit btn-lg">
-                            <i class="fa-solid fa-paper-plane me-2"></i> إرسال الاستمارة وتوليد الكود التلقائي
-                        </button>
-                    </div>
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-house-chimney-medical me-2"></i> نوع الخدمة والتدخل المطلوب والملخص الاجتماعي</span>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">تصنيف الخدمة والتدخل المطلوب الأساسي للحالة *</label>
+                                <select id="serviceType" class="form-select" required>
+                                    <option value="" disabled selected>اختر نوع الخدمة</option>
+                                    <option value="مشروع صغير">مشروع صغير (SP)</option>
+                                    <option value="إعمار">إعمار وتجهيز منزل (EM)</option>
+                                    <option value="سقف">تركيب سقف منزل (RO)</option>
+                                    <option value="وصلة مياه">توصيل مياه شرب نقية (WA)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">حالة وصف وتوصيف جدران وأسقف المنزل الحالي بالتفصيل *</label>
+                                <input type="text" id="houseStatus" class="form-control" placeholder="مثال: جدران طوب لبن وسقف جريد" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">التدخل المطلوب المقترح من الجمعية الشريكة والمنسق بالتفصيل بناءً على المعاينة الميدانية الأولى *</label>
+                                <textarea id="requiredIntervention" class="form-control" rows="3" placeholder="اكتب التدخل المقترح والأعمال المطلوبة بالتفصيل" required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية *</label>
+                                <textarea id="caseSummary" class="form-control" rows="3" placeholder="اكتب ملخص سريع يوضح أهمية التدخل والاستحقاق" required></textarea>
+                            </div>
+                        </div>
 
-                </form>
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-paperclip me-2"></i> المرفقات والجاهزية الفنية للملف</span>
+                        </div>
+                        <div class="row g-3 mb-5">
+                            <div class="col-md-4">
+                                <label class="form-label">الأوراق الثبوتية والبحث جاهز؟ *</label>
+                                <select id="papersReady" class="form-select" required>
+                                    <option value="" disabled selected>اختر الإجابة</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">يوجد صور وفيديو للمنزل قبل التنفيذ؟ *</label>
+                                <select id="mediaReady" class="form-select" required>
+                                    <option value="" disabled selected>اختر الإجابة</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">يوجد مقايسة مبدئية هندسية للأعمال؟ *</label>
+                                <select id="surveyReady" class="form-select" required>
+                                    <option value="" disabled selected>اختر الإجابة</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" id="submitBtn" class="btn btn-submit">
+                                <span id="btnText"><i class="fa-solid fa-paper-plane me-2"></i> إرسال الاستمارة وتوليد الكود</span>
+                                <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
-            
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // ⚠️ لا تنسى استبدال الرابط التخيلي التالي برابط الـ Web App (Deploy) الحقيقي الخاص بك لتفعيل الإرسال
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec";
 
-<script>
-    // رابط الـ Web App الخاص بك مدمج هنا تلقائياً وجاهز للعمل
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec";
-
-    function toggleAccessibilityDetails() {
-        const val = document.getElementById('hasAccessibility').value;
-        const div = document.getElementById('accessibilityDetailsDiv');
-        if (val === 'نعم') {
-            div.style.display = 'block';
-            document.getElementById('accessibilityDetails').required = true;
-        } else {
-            div.style.display = 'none';
-            document.getElementById('accessibilityDetails').required = false;
-        }
-    }
-
-    document.getElementById('caseForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // إظهار واجهة التحميل اللطيفة
-        document.getElementById('loadingOverlay').style.display = 'flex';
-
-        // دمج سؤال الحماية والدمج الحركي في خانة قصة الحالة بشكل منظم لحماية سرية البيانات وترتيب الأعمدة
-        let finalStory = document.getElementById('story').value;
-        const hasAccess = document.getElementById('hasAccessibility').value;
-        if(hasAccess === 'نعم') {
-            finalStory += "\n\n⚠️ [متطلبات الإتاحة والدمج الحركي للحقوق والحماية]: " + document.getElementById('accessibilityDetails').value;
-        } else {
-            finalStory += "\n\n✨ [متطلبات الإتاحة والدمج الحركي للحقوق والحماية]: لا يوجد متطلبات حركية خاصة للحالة.";
-        }
-
-        const formData = {
-            email: document.getElementById('email').value,
-            partner: document.getElementById('partner').value,
-            coordinator: document.getElementById('coordinator').value,
-            coordPhone: document.getElementById('coordPhone').value,
-            name: document.getElementById('name').value,
-            spouse: document.getElementById('spouse').value,
-            gender: document.getElementById('gender').value,
-            socialStatus: document.getElementById('socialStatus').value,
-            casePhone: document.getElementById('casePhone').value,
-            nid: document.getElementById('nid').value,
-            family: document.getElementById('family').value,
-            work: document.getElementById('work').value,
-            gov: document.getElementById('gov').value,
-            center: document.getElementById('center').value,
-            village: document.getElementById('village').value,
-            address: document.getElementById('address').value,
-            service: document.getElementById('service').value,
-            houseDesc: document.getElementById('houseDesc').value,
-            intervention: document.getElementById('intervention').value,
-            story: finalStory,
-            budget: document.getElementById('budget').value,
-            docsReady: document.getElementById('docsReady').value,
-            quotationReady: document.getElementById('quotationReady').value,
-            photosReady: document.getElementById('photosReady').value,
-            driveLink: document.getElementById('driveLink').value,
-            quotationLink: document.getElementById('quotationLink').value
-        };
-
-        fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
-        .then(() => {
-            document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('caseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            Swal.fire({
-                title: 'تم حفظ الحالة وتوليد الكود بنجاح! 🎉',
-                text: 'تم إدراج الحالة في قاعدة البيانات المركزية وتحديث حالتها تلقائياً إلى "مقترح" بنجاح.',
-                icon: 'success',
-                confirmButtonText: 'رائع جداً',
-                confirmButtonColor: '#0f2d4a'
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+
+            // تفعيل حالة التحميل للزر
+            submitBtn.disabled = true;
+            btnText.classList.add('d-none');
+            btnSpinner.classList.remove('d-none');
+            successAlert.style.display = "none";
+            errorAlert.style.display = "none";
+
+            // تجميع كافة البيانات بالتطابق مع الجوجل شيت
+            const formData = {
+                email: document.getElementById('email').value,
+                partner: document.getElementById('partner').value,
+                coordinator: document.getElementById('coordinator').value,
+                coordPhone: document.getElementById('coordPhone').value,
+                caseName: document.getElementById('caseName').value,
+                spouseName: document.getElementById('spouseName').value,
+                gender: document.getElementById('gender').value,
+                socialStatus: document.getElementById('socialStatus').value,
+                casePhone: document.getElementById('casePhone').value,
+                nationalId: document.getElementById('nationalId').value,
+                familyCount: document.getElementById('familyCount').value,
+                job: document.getElementById('job').value,
+                governorate: document.getElementById('governorate').value,
+                center: document.getElementById('center').value,
+                village: document.getElementById('village').value,
+                serviceType: document.getElementById('serviceType').value,
+                houseStatus: document.getElementById('houseStatus').value,
+                requiredIntervention: document.getElementById('requiredIntervention').value,
+                caseSummary: document.getElementById('caseSummary').value,
+                papersReady: document.getElementById('papersReady').value,
+                mediaReady: document.getElementById('mediaReady').value,
+                surveyReady: document.getElementById('surveyReady').value
+            };
+
+            // إرسال البيانات فوراً للـ Google Script
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                // إظهار رسالة النجاح وتصفير الاستمارة
+                successAlert.style.display = "block";
+                document.getElementById('caseForm').reset();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            })
+            .catch(error => {
+                errorAlert.style.display = "block";
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // إلغاء حالة التحميل للزر
+                submitBtn.disabled = false;
+                btnText.classList.remove('d-none');
+                btnSpinner.classList.add('d-none');
             });
-            
-            document.getElementById('caseForm').reset();
-            document.getElementById('accessibilityDetailsDiv').style.display = 'none';
-        })
-        .catch(error => {
-            document.getElementById('loadingOverlay').style.display = 'none';
-            Swal.fire({
-                title: 'عذراً، حدث خطأ في الشبكة',
-                text: 'يرجى مراجعة الاتصال بالإنترنت والمحاولة مجدداً أو التواصل مع الدعم الفني للمؤسسة.',
-                icon: 'error',
-                confirmButtonText: 'حسناً',
-                confirmButtonColor: '#d33'
-            });
-            console.error('Error:', error);
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
