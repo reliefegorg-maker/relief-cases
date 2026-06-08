@@ -13,7 +13,6 @@
             background-color: #f0f4f8;
             color: #102a43;
         }
-        /* الهيدر الاحترافي بنفس ألوان موقع المتبرعين */
         .app-header {
             background-color: #0f2d4a;
             color: white;
@@ -32,7 +31,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
             margin-top: -30px;
             margin-bottom: 50px;
-            border-top: 6px solid #00a859; /* الخط الأخضر المميز للمؤسسة */
+            border-top: 6px solid #00a859;
         }
         .section-badge {
             background-color: #0f2d4a;
@@ -77,7 +76,6 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 168, 89, 0.3);
         }
-        /* تنبيهات النجاح والفشل */
         .alert-custom {
             display: none;
             border-radius: 8px;
@@ -314,40 +312,39 @@
             const successAlert = document.getElementById('successAlert');
             const errorAlert = document.getElementById('errorAlert');
 
-            // تفعيل حالة التحميل للزر
             submitBtn.disabled = true;
             btnText.classList.add('d-none');
             btnSpinner.classList.remove('d-none');
             successAlert.style.display = "none";
             errorAlert.style.display = "none";
 
-            // تجميع كافة البيانات بالتطابق مع الجوجل شيت
+            // بناء البيانات بنفس مسميات ومفاتيح الجوجل فورم والـ Apps Script بالملي
             const formData = {
-                email: document.getElementById('email').value,
-                partner: document.getElementById('partner').value,
-                coordinator: document.getElementById('coordinator').value,
-                coordPhone: document.getElementById('coordPhone').value,
-                caseName: document.getElementById('caseName').value,
-                spouseName: document.getElementById('spouseName').value,
-                gender: document.getElementById('gender').value,
-                socialStatus: document.getElementById('socialStatus').value,
-                casePhone: document.getElementById('casePhone').value,
-                nationalId: document.getElementById('nationalId').value,
-                familyCount: document.getElementById('familyCount').value,
-                job: document.getElementById('job').value,
-                governorate: document.getElementById('governorate').value,
-                center: document.getElementById('center').value,
-                village: document.getElementById('village').value,
-                serviceType: document.getElementById('serviceType').value,
-                houseStatus: document.getElementById('houseStatus').value,
-                requiredIntervention: document.getElementById('requiredIntervention').value,
-                caseSummary: document.getElementById('caseSummary').value,
-                papersReady: document.getElementById('papersReady').value,
-                mediaReady: document.getElementById('mediaReady').value,
-                surveyReady: document.getElementById('surveyReady').value
+                "طابع زمني": new Date().toLocaleString('ae-EG'),
+                "عنوان البريد الإلكتروني": document.getElementById('email').value,
+                "اسم الجمعية الشريكة بالكامل": document.getElementById('partner').value,
+                "اسم المنسق المسؤول": document.getElementById('coordinator').value,
+                "رقم هاتف المنسق": document.getElementById('coordPhone').value,
+                "اسم الحالة المستهدفة ثلاثي أو رباعي كما في البطاقة": document.getElementById('caseName').value,
+                "اسم الزوج / الزوجة": document.getElementById('spouseName').value,
+                "الجنس": document.getElementById('gender').value,
+                "الحالة الاجتماعية": document.getElementById('socialStatus').value,
+                "رقم هاتف الحالة المستهدفة للاتصال والتأكد": document.getElementById('casePhone').value,
+                "الرقم القومي للحالة المستهدفة المكون من 14 رقم": document.getElementById('nationalId').value,
+                "عدد أفراد الأسرة المقيمين مع الحالة": document.getElementById('familyCount').value,
+                "عمل العائل الأساسي للحالة والوظيفة الحالية": document.getElementById('job').value,
+                "المحافظة": document.getElementById('governorate').value,
+                "المركز / البندر التابع له الحالة": document.getElementById('center').value,
+                "القرية / النجوع / الحي التابع للحالة": document.getElementById('village').value,
+                "تصنيف الخدمة والتدخل المطلوب الأساسي للحالة": document.getElementById('serviceType').value,
+                "حالة وصف وتوصيف جدران وأسقف المنزل الحالي بالتفصيل": document.getElementById('houseStatus').value,
+                "التدخل المطلوب المقترح من الجمعية الشريكة والمنسق بالتفصيل بناءً على المعاينة الميدانية الأولى": document.getElementById('requiredIntervention').value,
+                "نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية": document.getElementById('caseSummary').value,
+                "الأوراق الثبوتية والبحث جاهز؟": document.getElementById('papersReady').value,
+                "يوجد صور وفيديو للمنزل قبل التنفيذ؟": document.getElementById('mediaReady').value,
+                "يوجد مقايسة مبدئية هندسية للأعمال؟": document.getElementById('surveyReady').value
             };
 
-            // إرسال البيانات فوراً للـ Google Script
             fetch(WEB_APP_URL, {
                 method: 'POST',
                 mode: 'no-cors',
