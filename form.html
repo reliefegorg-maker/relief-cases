@@ -201,3 +201,177 @@
                                     <option value="أسيوط">أسيوط</option>
                                     <option value="سوهاج">سوهاج</option>
                                     <option value="قنا">قنا</option>
+                                    <option value="الأقصر">الأقصر</option>
+                                    <option value="أسوان">أسوان</option>
+                                    <option value="البحيرة">البحيرة</option>
+                                    <option value="الشرقية">الشرقية</option>
+                                    <option value="الدقهلية">الدقهلية</option>
+                                    <option value="الغربية">الغربية</option>
+                                    <option value="دمياط">دمياط</option>
+                                    <option value="بورسعيد">بورسعيد</option>
+                                    <option value="الإسماعيلية">الإسماعيلية</option>
+                                    <option value="السويس">السويس</option>
+                                    <option value="كفر الشيخ">كفر الشيخ</option>
+                                    <option value="مطروح">مطروح</option>
+                                    <option value="الوادي الجديد">الوادي الجديد</option>
+                                    <option value="البحر الأحمر">البحر الأحمر</option>
+                                    <option value="شمال سيناء">شمال سيناء</option>
+                                    <option value="جنوب سيناء">جنوب سيناء</option>
+                                    <option value="الإسكندرية">الإسكندرية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">المركز / البندر التابع له الحالة *</label>
+                                <input type="text" id="center" class="form-control" placeholder="اكتب اسم المركز أو المدينة" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">القرية / النجوع / الحي التابع للحالة *</label>
+                                <input type="text" id="village" class="form-control" placeholder="اكتب اسم القرية أو الحي" required>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label class="form-label">لوكشين المكان ، جوجل ماب لمكان التنفيذ</label>
+                                <input type="url" id="locationUrl" class="form-control" placeholder="ضع رابط خريطة جوجل هنا (مثل: https://maps.google.com/...) أو اترك الحقل فارغاً">
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-house-chimney-medical me-2"></i> نوع الخدمة والتدخل المطلوب والملخص الاجتماعي</span>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">تصنيف الخدمة والتدخل المطلوب الأساسي للحالة *</label>
+                                <select id="serviceType" class="form-select" required>
+                                    <option value="" disabled selected>اختر نوع الخدمة</option>
+                                    <option value="مشروع صغير">مشروع صغير (SP)</option>
+                                    <option value="إعمار">إعمار وتجهيز منزل (EM)</option>
+                                    <option value="سقف">تركيب سقف منزل (RO)</option>
+                                    <option value="وصلة مياه">توصيل مياه شرب نقية (WA)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">حالة وصف وتوصيف جدران وأسقف المنزل الحالي بالتفصيل *</label>
+                                <input type="text" id="houseStatus" class="form-control" placeholder="مثال: جدران طوب لبن وسقف جريد" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">التدخل المطلوب المقترح من الجمعية الشريكة والمنسق بالتفصيل بناءً على المعاينة الميدانية الأولى *</label>
+                                <textarea id="requiredIntervention" class="form-control" rows="3" placeholder="اكتب التدخل المقترح والأعمال المطلوبة بالتفصيل" required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية *</label>
+                                <textarea id="caseSummary" class="form-control" rows="3" placeholder="اكتب ملخص سريع يوضح أهمية التدخل والاستحقاق" required></textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="section-badge"><i class="fa-solid fa-paperclip me-2"></i> المرفقات والجاهزية الفنية للملف</span>
+                        </div>
+                        <div class="row g-3 mb-5">
+                            <div class="col-md-4">
+                                <label class="form-label">الأوراق الثبوتية والبحث جاهز؟ *</label>
+                                <select id="papersReady" class="form-select" required>
+                                    <option value="" disabled selected>اختر الإجابة</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">يوجد صور وفيديو للمنزل قبل التنفيذ؟ *</label>
+                                <select id="mediaReady" class="form-select" required>
+                                    <option value="" disabled selected>اختر الإجابة</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">يوجد مقايسة مبدئية هندسية للأعمال؟ *</label>
+                                <select id="surveyReady" class="form-select" required>
+                                    <option value="" disabled selected>اختر الإجابة</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" id="submitBtn" class="btn btn-submit">
+                                <span id="btnText"><i class="fa-solid fa-paper-plane me-2"></i> إرسال الاستمارة وتوليد الكود</span>
+                                <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec";
+
+        document.getElementById('caseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+
+            submitBtn.disabled = true;
+            btnText.classList.add('d-none');
+            btnSpinner.classList.remove('d-none');
+            successAlert.style.display = "none";
+            errorAlert.style.display = "none";
+
+            const formData = {
+                "طابع زمني": new Date().toLocaleString('ae-EG'),
+                "عنوان البريد الإلكتروني": document.getElementById('email').value,
+                "اسم الجمعية الشريكة بالكامل": document.getElementById('partner').value,
+                "اسم المنسق المسؤول": document.getElementById('coordinator').value,
+                "رقم هاتف المنسق": document.getElementById('coordPhone').value,
+                "اسم الحالة المستهدفة ثلاثي أو رباعي كما في البطاقة": document.getElementById('caseName').value,
+                "اسم الزوج / الزوجة": document.getElementById('spouseName').value,
+                "الجنس": document.getElementById('gender').value,
+                "الحالة الاجتماعية": document.getElementById('socialStatus').value,
+                "رقم هاتف الحالة المستهدفة للاتصال والتأكد": document.getElementById('casePhone').value,
+                "الرقم القومي للحالة المستهدفة المكون من 14 رقم": document.getElementById('nationalId').value,
+                "عدد أفراد الأسرة المقيمين مع الحالة": document.getElementById('familyCount').value,
+                "عمل العائل الأساسي للحالة والوظيفة الحالية": document.getElementById('job').value,
+                "المحافظة": document.getElementById('governorate').value,
+                "المركز / البندر التابع له الحالة": document.getElementById('center').value,
+                "القرية / النجوع / الحي التابع للحالة": document.getElementById('village').value,
+                "تصنيف الخدمة والتدخل المطلوب الأساسي للحالة": document.getElementById('serviceType').value,
+                "حالة وصف وتوصيف جدران وأسقف المنزل الحالي بالتفصيل": document.getElementById('houseStatus').value,
+                "التدخل المطلوب المقترح من الجمعية الشريكة والمنسق بالتفصيل بناءً على المعاينة الميدانية الأولى": document.getElementById('requiredIntervention').value,
+                "نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية": document.getElementById('caseSummary').value,
+                "الأوراق الثبوتية والبحث جاهز؟": document.getElementById('papersReady').value,
+                "يوجد صور وفيديو للمنزل قبل التنفيذ؟": document.getElementById('mediaReady').value,
+                "يوجد مقايسة مبدئية هندسية للأعمال؟": document.getElementById('surveyReady').value,
+                "لوكشين المكان ، جوجل ماب لمكان التنفيذ ": document.getElementById('locationUrl').value
+            };
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                successAlert.style.display = "block";
+                document.getElementById('caseForm').reset();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            })
+            .catch(error => {
+                errorAlert.style.display = "block";
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                btnText.classList.remove('d-none');
+                btnSpinner.classList.add('d-none');
+            });
+        });
+    </script>
+</body>
+</html>
