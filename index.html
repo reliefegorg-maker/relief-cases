@@ -22,249 +22,308 @@
     --radius: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-  header { background: var(--primary); padding: 20px 0; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
-  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-  .logo-area { display: flex; align-items: center; gap: 15px; }
-  .logo-img { height: 60px; width: auto; background: var(--white); padding: 5px; border-radius: 8px; }
-  .logo-text { color: var(--white); }
-  .logo-text h1 { font-size: 1.4rem; font-weight: 700; }
-  .logo-text p { font-size: 0.85rem; color: #cbd5e1; }
-  
-  .hero { background: linear-gradient(135deg, #1A3E62 0%, #2E6B9E 100%); color: var(--white); padding: 50px 20px; text-align: center; margin-bottom: 40px; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05); }
-  .hero h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; }
-  .hero p { font-size: 1.1rem; color: #e2e8f0; max-width: 600px; margin: 0 auto; }
-  
-  .main-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
-  .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
-  
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
-  .case-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; border: 1px solid var(--border); opacity: 0; transform: translateY(20px); animation: fadeInUp 0.4s forwards; }
-  .case-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
-  
-  .case-card-top { padding: 20px 20px 10px; display: flex; justify-content: space-between; align-items: flex-start; }
-  .case-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-  .icon-sp { background: #fff1f2; color: #e11d48; }
-  .icon-em { background: #f0fdf4; color: #16a34a; }
-  .icon-ro { background: #eff6ff; color: #2563eb; }
-  .icon-wa { background: #f0f9ff; color: #0284c7; }
-  .case-code { background: #f1f5f9; color: var(--primary); font-weight: 700; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); }
-  
-  .case-card-body { padding: 0 20px 20px; flex-grow: 1; display: flex; flex-direction: column; }
-  .case-service { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; tracking-wide: 0.05em; margin-bottom: 4px; }
-  .case-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
-  .case-desc { font-size: 0.95rem; color: #475569; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; background: #f8fafc; padding: 12px; border-radius: 8px; border-right: 3px solid #cbd5e1; }
-  
-  .case-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding-top: 10px; border-top: 1px dashed var(--border); }
-  .case-meta-item { font-size: 0.85rem; background: #f8fafc; padding: 4px 10px; border-radius: 6px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; border: 1px solid #f1f5f9; }
-  
-  .case-actions { display: flex; gap: 12px; }
-  .btn { flex: 1; padding: 12px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-align: center; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-primary { background: var(--teal); color: var(--white); box-shadow: 0 4px 12px rgba(15,110,86,0.2); }
-  .btn-primary:hover { background: #0c5744; }
-  .btn-outline { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
-  .btn-outline:hover { background: #f1f5f9; }
-  
-  .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-  .modal-content { background: var(--white); width: 100%; max-width: 600px; border-radius: var(--radius); box-shadow: var(--shadow-lg); animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); overflow: hidden; position: relative; }
-  .modal-header { background: var(--primary); color: var(--white); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-  .modal-header h3 { font-size: 1.3rem; font-weight: 700; }
-  .close-modal { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; opacity: 0.8; }
-  .close-modal:hover { opacity: 1; }
-  .modal-body { padding: 25px; max-height: 70vh; overflow-y: auto; }
-  .modal-section { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
-  .modal-section:last-child { border: none; margin: 0; padding: 0; }
-  .modal-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
-  .modal-value { font-size: 1.05rem; color: var(--text); font-weight: 700; }
-  .modal-story { background: #f8fafc; padding: 15px; border-radius: 8px; border-right: 4px solid var(--accent); margin-top: 5px; font-size: 1rem; color: #334155; text-align: justify; }
-  
-  .loading-container { text-align: center; padding: 60px 0; grid-column: 1 / -1; }
-  .spinner { width: 50px; height: 50px; border: 5px solid #e2e8f0; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-  .loading-text { font-weight: 600; color: var(--primary); }
-  
-  .empty-state { text-align: center; padding: 60px 20px; grid-column: 1 / -1; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
-  .empty-icon { font-size: 3.5rem; margin-bottom: 15px; }
-  .empty-title { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-  .empty-desc { color: var(--text-muted); font-size: 0.95rem; }
-
+  body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); direction: rtl; }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0f2440 100%);
+    color: white; padding: 0; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto; padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header-brand { display: flex; align-items: center; gap: 12px; }
+  .header-logo-img { height: 52px; width: auto; border-radius: 8px; background: white; padding: 4px; }
+  .header-title { font-size: 17px; font-weight: 800; }
+  .header-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+  .header-contact {
+    background: var(--accent); color: var(--primary); padding: 9px 16px; border-radius: 10px;
+    font-weight: 800; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+  }
+  .header-contact:hover { background: #f5c842; }
+  .header-donate {
+    background: #25D366; color: white; padding: 9px 16px; border-radius: 10px;
+    font-weight: 800; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+  }
+  .header-donate:hover { background: #1ea855; }
+  .header-paytabs {
+    background: var(--orange); color: white; padding: 9px 16px; border-radius: 10px;
+    font-weight: 800; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+  }
+  .header-paytabs:hover { background: #a84a0d; }
+  .donate-btn-paytabs {
+    width: 100%; padding: 11px; background: var(--orange); color: white; border: none; border-radius: 10px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; margin-top: 8px;
+  }
+  .donate-btn-paytabs:hover { background: #a84a0d; }
+  .donate-btn-whatsapp {
+    width: 100%; padding: 11px; background: #25D366; color: white; border: none; border-radius: 10px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; margin-top: 8px;
+  }
+  .donate-btn-whatsapp:hover { background: #1ea855; }
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+    color: white; padding: 60px 24px; text-align: center;
+  }
+  .hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 16px; line-height: 1.3; }
+  .hero p { font-size: 16px; opacity: 0.85; max-width: 600px; margin: 0 auto 32px; line-height: 1.7; }
+  .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 36px; font-weight: 900; color: var(--accent); display: block; }
+  .hero-stat-label { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+  .filters-bar {
+    background: white; border-bottom: 1px solid var(--border); padding: 16px 24px;
+    position: sticky; top: 76px; z-index: 90; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .filters-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .filter-label { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+  .filter-btn {
+    padding: 8px 18px; border-radius: 20px; border: 2px solid var(--border); background: white;
+    cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-muted); transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .search-wrap { flex: 1; min-width: 200px; position: relative; }
+  .search-wrap input {
+    width: 100%; padding: 9px 40px 9px 16px; border: 2px solid var(--border); border-radius: 20px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; outline: none; direction: rtl; transition: border 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--primary); }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+  .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .loading { text-align: center; padding: 80px 20px; color: var(--text-muted); }
+  .spinner {
+    width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--primary);
+    border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-  @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  
-  @media (max-width: 768px) {
-    .nav-container { flex-direction: column; text-align: center; gap: 15px; }
-    .hero h2 { font-size: 1.8rem; }
-    .grid { grid-template-columns: 1fr; }
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .case-card {
+    background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; animation: fadeIn 0.4s ease both;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .case-card-top { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+  .case-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .icon-roof { background: #dbeafe; }
+  .icon-water { background: #d1fae5; }
+  .icon-project { background: #ede9fe; }
+  .icon-food { background: #fef3c7; }
+  .icon-other { background: #f1f5f9; }
+  .case-code { font-family: monospace; font-size: 11px; background: #f1f5f9; padding: 4px 10px; border-radius: 8px; color: var(--primary); font-weight: 700; }
+  .case-card-body { padding: 16px 20px; flex: 1; }
+  .case-service { font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .case-title { font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 8px; line-height: 1.4; }
+  .case-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .case-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .case-meta-item { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  .case-card-footer { padding: 0 20px 20px; }
+  footer { background: var(--primary); color: white; padding: 32px 24px; text-align: center; margin-top: 60px; }
+  footer p { font-size: 13px; opacity: 0.7; margin-top: 8px; }
+  .footer-logo { height: 60px; width: auto; margin-bottom: 12px; border-radius: 8px; background: white; padding: 6px; }
+  @media(max-width: 900px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width: 600px) {
+    .cases-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+    .hero-stats { gap: 24px; }
+    .filters-inner { gap: 8px; }
+    .header-inner { flex-wrap: wrap; gap: 8px; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="nav-container">
-    <div class="logo-area">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAMAAAC9L2SFAAAASFBMVEVHcEwAAAAAnQAAnwAArQAAsAAAtgAAvwAAxwAA0QAA2wAA4wAA6wAA9wAA/wD///8AqtS9mZmZzMzM///M5szmzP//zGbMzMx3ZkoVAAAAAXRSTlMAQObYZgAAA6BJREFUeNrtl9tywyAMRUEuM8z//9pOS9NutpZInIBy36ZOnYgXbIdAnIsgCIIgCIIgCIIgCIKgl9Asm6w/XGf96mbyv7IisP54m6v7A6zXfXWJpS03wPrp6zXWW9f7AasFsC6xWp0ArAtYf6XvD7BqXWNdY7XpA1g9rEesXwGsNf0Aa9UFYFViPQ9Yf6bvD7B+6gZrfYv10zVYf6bvD7B++m/A+id9f4D1Z2B9g/XP9P0B1p9Yf9gK6zPr7b8Ba9MFYFVifR6w/kzfH2B99g3Wx6eKxPp7wPrpewDrdwBrsX8EwALWb9YCsID1m7UArG+wVvunp1gsYAFrg8UCFrDWWADWf7DkWKyXv8YCsID1WwALWL9ZC8AC1m/WArA2WCv6pxbAAtbS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uEwLWAArBsdicSyAFbMAYAGs3iwAWACrNwvAusQlY2ERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCzWaBYArBhsS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XgWIeXW38F1mEBrA9g7X9gXWKtdU6Z9clWWB8fWAsA60/vXgCWBKwtFoB1gUvGAtb6LhaAhbEALGB9AixgXb8XgAWshR0sgAWsnAAsYOWkYAErZwYsYAGsgAWwYnAsgAWwYhYALIAVswBgAayYBQArBsdiAayYBQALYMUsAFgAK2YBwAJYvVkAsABWbxaAdYlLxsIisFjAwsIisFjAwsIisFjAwsIisFjAwsIisFis0SwAWDHYEAtgxSwAWACrNwvAFsDqzQKwLnHJWMBaxgKwMBaAJSfHAtYyFoCFsQAsgBXDAljLWAAsgBXDAlgxOBbAAlgxCwAWwIpZALCWsWBxDIsFrE9eMhbmsFiYw2JhDouFOSwW5rBYmMNiYQ6LhTksFuaIwbFYmAcsgBWzAGABrJgFAAtg9WYBWFgEFotFwGIBi8ViEYDFAg7pD6S7IisCgscvCIIgCIIgCIIgCILgD/ED0vAt9677b0cAAAAASUVORK5CYII=" alt="مؤسسة الإغاثة والطوارئ" class="logo-img">
+  <div class="header-inner">
+    <div class="header-brand">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAALXntfAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAABRJREFUeNvtYQEAAADCoPvpA3oYVAAAO30AAV79b70AAAAAElFTkSuQmCC" class="header-logo-img" alt="Logo">
+      <div>
+        <div class="header-title">مؤسسة الإغاثة والطوارئ</div>
+        <div class="header-sub">حالات تستحق الدعم والرعاية</div>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <a href="https://wa.me/201000000000" target="_blank" class="header-donate">💬 تبرع عبر واتساب</a>
     </div>
   </div>
 </header>
 
-<div class="hero">
-  <h2>بوابة الخير والإغاثة</h2>
-  <p>تبرعك الآن يساهم مباشرة في توفير حياة كريمة للأسر الأكثر استحقاقاً في كافة محافظات مصر.</p>
-</div>
-
-<div class="main-container">
-  <div class="section-title">
-    <span>📋 الحالات العاجلة المتاحة حالياً</span>
+<section class="hero">
+  <h1>من أحياها.. فكأنما أحيا الناس جميعاً</h1>
+  <p>ساهم معنا في دعم الحالات الأكثر احتياجاً وتوفير حياة كريمة لهم. تبرعك يصنع فارقاً حقيقياً في حياة أسر بأكملها.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="total-cases">0</span>
+      <span class="hero-stat-label">حالة مستهدفة</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num" id="total-budget">0 ج.م</span>
+      <span class="hero-stat-label">إجمالي الميزانية المطلوبة</span>
+    </div>
   </div>
-  
-  <div class="grid" id="casesGrid">
-    <div class="loading-container" id="loading">
-      <div class="spinner"></div>
-      <div class="loading-text">جاري تحميل الحالات المعتمدة...</div>
+</section>
+
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">تصفية الحالات:</span>
+    <button class="filter-btn active" onclick="changeFilter('all', this)">الكل</button>
+    <button class="filter-btn" onclick="changeFilter('سقف', this)">أسقف وأعمدة</button>
+    <button class="filter-btn" onclick="changeFilter('مياه', this)">وصلات مياه</button>
+    <button class="filter-btn" onclick="changeFilter('تمكين', this)">تمكين اقتصادي</button>
+    <button class="filter-btn" onclick="changeFilter('كرتونة', this)">دعم غذائي</button>
+    
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="بحث بكود الحالة أو المحافظة..." oninput="handleSearch()">
+      <span class="search-icon">🔍</span>
     </div>
   </div>
 </div>
 
-<div class="modal" id="caseModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="modalTitle">تفاصيل الحالة</h3>
-      <button class="close-modal" onclick="closeModal()">&times;</button>
-    </div>
-    <div class="modal-body" id="modalBody">
-      </div>
+<main class="main">
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>جاري تحميل الحالات الإنسانية...</p>
   </div>
-</div>
+  <div id="cases-grid" class="cases-grid" style="display:none;"></div>
+</main>
+
+<footer>
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAALXntfAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAABRJREFUeNvtYQEAAADCoPvpA3oYVAAAO30AAV79b70AAAAAElFTkSuQmCC" class="footer-logo" alt="Logo"><br>
+  <strong>مؤسسة الإغاثة والطوارئ</strong>
+  <p>© جميع الحقوق محفوظة لعام 2026</p>
+</footer>
 
 <script>
-// الرابط الخاص بجوجل شيت المحدث والنهائي
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec";
-let allCases = [];
+  let allCases = [];
+  let currentFilter = 'all';
 
-async function loadCases() {
-  const grid = document.getElementById('casesGrid');
-  try {
-    const res = await fetch(SHEET_URL);
-    const data = await res.json();
+  // دالة جلب البيانات من الـ API المشترك
+  async function fetchCases() {
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbw6H0U_Kskj33Z1LqU3qor0_N0e7Wn8G7_M_Pwt5Lsh2A123/exec');
+      allCases = await response.json();
+      
+      // إخفاء دالة التحميل وعرض الشبكة الأساسية
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('cases-grid').style.display = 'grid';
+      
+      renderCases(allCases);
+    } catch (error) {
+      console.error("حدث خطأ أثناء جلب البيانات:", error);
+      document.getElementById('loading').innerHTML = '<p style="color:var(--orange)">عذراً، فشل تحميل البيانات. يرجى إعادة المحاولة لاحقاً.</p>';
+    }
+  }
+
+  // دالة تحديث الإحصائيات بأمان دون التعرض لخطأ NaN
+  function updateStats() {
+    if (!allCases || allCases.length === 0) return;
     
-    // فلترة وفرز البيانات لتقرأ العناوين العربية الصحيحة
-    allCases = data.map(row => {
-      return {
-        code: row["الكود"] || row["كود الحالة"] || '',
-        service: row["تصنيف الخدمة والتدخل المطلوب الأساسي للحالة"] || '',
-        gov: row["المحافظة"] || '',
-        family: row["عدد أفراد الأسرة المقيمين مع الحالة"] || '',
-        partner: row["اسم الجمعية الشريكة بالكامل"] || '',
-        summary: row["نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية"] || '',
-        reviewNotes: row["ملاحظات المراجع"] || row["ملاحظات المراجعة"] || '' 
-      };
-    }).filter(c => c.reviewNotes && c.reviewNotes.trim() !== ""); // تم تصحيح حرف N ليعمل الفلتر بناءً على وجود الملاحظات
+    document.getElementById('total-cases').textContent = allCases.length;
+    
+    // تحويل النصوص الممثلة للمبالغ إلى أرقام صحيحة بدقة مع تنظيف الفواصل
+    const totalBudget = allCases.reduce((sum, c) => {
+      if (!c.budget) return sum;
+      const budgetNumber = parseInt(c.budget.toString().replace(/,/g, ''));
+      return sum + (isNaN(budgetNumber) ? 0 : budgetNumber);
+    }, 0);
 
+    document.getElementById('total-budget').textContent = totalBudget.toLocaleString('ar-EG') + ' ج.م';
+  }
+
+  // دالة رسم بطاقات الحالات
+  function renderCases(casesArray) {
+    const grid = document.getElementById('cases-grid');
     grid.innerHTML = '';
-    
-    if (allCases.length === 0) {
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">🤝</div>
-          <div class="empty-title">لا توجد حالات حالياً</div>
-          <div class="empty-desc">تمت تلبية جميع الحالات المفتوحة وجاري مراجعة حالات جديدة لتظهر هنا قريباً.</div>
-        </div>`;
+
+    if(casesArray.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">لا توجد حالات تطابق البحث حالياً.</div>';
       return;
     }
 
-    allCases.forEach((c, i) => {
-      let icon = '📦', iconClass = 'icon-sp';
-      if (c.service.includes('إعمار')) { icon = '🏠'; iconClass = 'icon-em'; }
-      else if (c.service.includes('سقف')) { icon = '🪵'; iconClass = 'icon-ro'; }
-      else if (c.service.includes('وصلة مياه')) { icon = '🚰'; iconClass = 'icon-wa'; }
-      else if (c.service.includes('مشروع')) { icon = '💼'; iconClass = 'icon-sp'; }
+    casesArray.forEach((c, i) => {
+      let icon = '🤝';
+      let iconClass = 'icon-other';
+      const service = (c.service || '').toLowerCase();
 
-      const story = c.summary || 'حالة مستحقة تحتاج إلى دعمك للحصول على مسكن لائق وحياة كريمة.';
+      if(service.includes('سقف') || service.includes('بناء')) { icon = '🏠'; iconClass = 'icon-roof'; }
+      else if(service.includes('مياه') || service.includes('حفر')) { icon = '🚰'; iconClass = 'icon-water'; }
+      else if(service.includes('تمكين') || service.includes('مشروع')) { icon = '💼'; iconClass = 'icon-project'; }
+      else if(service.includes('غذاء') || service.includes('كرتونة')) { icon = '📦'; iconClass = 'icon-food'; }
+
+      const story = c.story || 'حالة إنسانية تستحق الدعم والرعاية، تحتاج إلى دعمكم الكريم لضمان حياة مستقرة وعفيفة لها ولأسرتها.';
       const storyShort = story.length > 120 ? story.substring(0, 120) + '...' : story;
-      const waMsg = encodeURIComponent(`أريد التبرع للحالة:\nالكود: ${c.code}\nالخدمة: ${c.service}\nالمحافظة: ${c.gov}`);
-      
+      const waMsg = encodeURIComponent(`أريد التبرع للحالة:\nالكود: ${c.code}\nالخدمة: ${c.service}\nالمحافظة: ${c.gov}\nالمبلغ: ${c.budget || 'يرجى الاستفسار'}`);
+
       const card = `
-      <div class="case-card" style="animation-delay:${i*0.05}s">
-        <div class="case-card-top">
-          <div class="case-icon ${iconClass}">${icon}</div>
-          ${c.code ? `<span class="case-code">${c.code}</span>` : ''}
-        </div>
-        <div class="case-card-body">
-          <div class="case-service">${c.service || 'خدمة إغاثية'}</div>
-          <div class="case-title">${c.service.split('(')[0] || 'حالة إنسانية'} · ${c.gov || 'محافظة مصري'}</div>
-          <div class="case-desc">${storyShort}</div>
-          <div class="case-meta">
-            ${c.gov ? `<div class="case-meta-item">📍 ${c.gov}</div>` : ''}
-            ${c.family ? `<div class="case-meta-item">👨‍👩‍👧 ${c.family} أفراد</div>` : ''}
-            ${c.partner ? `<div class="case-meta-item">🤝 ${c.partner}</div>` : ''}
+        <div class="case-card" style="animation-delay:${i * 0.05}s">
+          <div class="case-card-top">
+            <div class="case-icon ${iconClass}">${icon}</div>
+            ${c.code ? `<span class="case-code">${c.code}</span>` : ''}
           </div>
-          <div class="case-actions">
-            <button class="btn btn-outline" onclick="openModal(${i})">التفاصيل</button>
-            <a href="https://wa.me/201019183424?text=${waMsg}" target="_blank" class="btn btn-primary">تبرع الآن</a>
+          <div class="case-card-body">
+            <div class="case-service">${c.service || 'خدمة إغاثية'}</div>
+            <div class="case-title">${c.service || 'حالة'} · ${c.gov || 'محافظة'}</div>
+            <div class="case-desc">${storyShort}</div>
+            <div class="case-meta">
+              ${c.gov ? `<div class="case-meta-item">📍 ${c.gov}</div>` : ''}
+              ${c.family ? `<div class="case-meta-item">👨‍👩‍👧 ${c.family} أفراد</div>` : ''}
+              ${c.partner ? `<div class="case-meta-item">🤝 ${c.partner}</div>` : ''}
+            </div>
+          </div>
+          <div class="case-card-footer">
+            <a href="https://wa.me/201000000000?text=${waMsg}" target="_blank" class="donate-btn-whatsapp">📧 كفل الحالة عبر واتساب</a>
           </div>
         </div>
-      </div>`;
-      grid.insertAdjacentHTML('beforeend', card);
+      `;
+      grid.innerHTML += card;
     });
-
-  } catch (err) {
-    console.error(err);
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">⚠️</div>
-        <div class="empty-title">فشل تحميل البيانات</div>
-        <div class="empty-desc">يرجى التحقق من اتصالك بالإنترنت وتحديث الصفحة مجدداً.</div>
-      </div>`;
   }
-}
 
-function openModal(idx) {
-  const c = allCases[idx];
-  document.getElementById('modalTitle').innerText = `تفاصيل الحالة كود: ${c.code || 'غير متوفر'}`;
-  
-  const bodyHtml = `
-    <div class="modal-section">
-      <div class="modal-label">الخدمة المطلوبة والتدخل الأساسي</div>
-      <div class="modal-value">${c.service || 'غير محدد'}</div>
-    </div>
-    <div class="modal-section" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-      <div>
-        <div class="modal-label">المحافظة</div>
-        <div class="modal-value">📍 ${c.gov || 'غير محدد'}</div>
-      </div>
-      <div>
-        <div class="modal-label">عدد أفراد الأسرة</div>
-        <div class="modal-value">👨‍👩‍👧 ${c.family || 'غير محدد'} أفراد</div>
-      </div>
-    </div>
-    <div class="modal-section">
-      <div class="modal-label">الجمعية الشريكة المسؤولة</div>
-      <div class="modal-value">🤝 ${c.partner || 'غير محدد'}</div>
-    </div>
-    <div class="modal-section">
-      <div class="modal-label">القصة والوضع الاجتماعي الميداني للحالة</div>
-      <div class="modal-story">${c.summary || 'لا يوجد وصف نثري للحالة.'}</div>
-    </div>
-    <div class="modal-section" style="margin-top:25px;">
-      <a href="https://wa.me/201019183424?text=${encodeURIComponent('أريد التبرع للحالة كود: ' + c.code)}" target="_blank" class="btn btn-primary" style="width:100%;">تواصل عبر واتساب للتبرع للحالة</a>
-    </div>
-  `;
-  
-  document.getElementById('modalBody').innerHTML = bodyHtml;
-  document.getElementById('caseModal').style.display = 'flex';
-}
+  // دالة الفلترة بالضغط على الأزرار
+  function changeFilter(filterValue, btnElement) {
+    currentFilter = filterValue;
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+    applyFilterAndSearch();
+  }
 
-function closeModal() {
-  document.getElementById('caseModal').style.display = 'none';
-}
+  // دالة البحث عبر شريط المدخلات
+  function handleSearch() {
+    applyFilterAndSearch();
+  }
 
-window.onclick = function(event) {
-  const modal = document.getElementById('caseModal');
-  if (event.target == modal) closeModal();
-}
+  // تطبيق التصفية والبحث معاً
+  function applyFilterAndSearch() {
+    const searchText = document.getElementById('search-input').value.trim().toLowerCase();
+    
+    let filtered = allCases;
 
-document.addEventListener('DOMContentLoaded', loadCases);
+    if (currentFilter !== 'all') {
+      filtered = filtered.filter(c => (c.service || '').toLowerCase().includes(currentFilter));
+    }
+
+    if (searchText) {
+      filtered = filtered.filter(c => 
+        (c.code || '').toLowerCase().includes(searchText) || 
+        (c.gov || '').toLowerCase().includes(searchText) ||
+        (c.service || '').toLowerCase().includes(searchText)
+      );
+    }
+
+    renderCases(filtered);
+  }
+
+  // دالة تهيئة وتحميل الصفحة بالترتيب الصحيح لمنع الأخطاء البرمجية
+  async function initPage() {
+    await fetchCases();  // ننتظر أولاً جلب البيانات بالكامل
+    updateStats();       // نقوم بتحديث العدادات والمجموع الإجمالي بأمان
+  }
+
+  // تشغيل الصفحة عند التحميل
+  initPage();
 </script>
 </body>
 </html>
