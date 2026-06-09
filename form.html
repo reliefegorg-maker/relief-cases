@@ -227,6 +227,10 @@
                                 <label class="form-label">القرية / النجوع / الحي التابع للحالة *</label>
                                 <input type="text" id="village" class="form-control" placeholder="اكتب اسم القرية أو الحي" required>
                             </div>
+                            <div class="col-md-12 mt-3">
+                                <label class="form-label">لوكشين المكان ، جوجل ماب لمكان التنفيذ</label>
+                                <input type="url" id="locationUrl" class="form-control" placeholder="ضع رابط خريطة جوجل هنا (http://maps.google.com/...) أو اترك الحقل فارغاً">
+                            </div>
                         </div>
 
                         <div>
@@ -318,7 +322,6 @@
             successAlert.style.display = "none";
             errorAlert.style.display = "none";
 
-            // بناء البيانات بنفس مسميات ومفاتيح الجوجل فورم والـ Apps Script بالملي
             const formData = {
                 "طابع زمني": new Date().toLocaleString('ae-EG'),
                 "عنوان البريد الإلكتروني": document.getElementById('email').value,
@@ -342,7 +345,8 @@
                 "نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية": document.getElementById('caseSummary').value,
                 "الأوراق الثبوتية والبحث جاهز؟": document.getElementById('papersReady').value,
                 "يوجد صور وفيديو للمنزل قبل التنفيذ؟": document.getElementById('mediaReady').value,
-                "يوجد مقايسة مبدئية هندسية للأعمال؟": document.getElementById('surveyReady').value
+                "يوجد مقايسة مبدئية هندسية للأعمال؟": document.getElementById('surveyReady').value,
+                "لوكشين المكان ، جوجل ماب لمكان التنفيذ ": document.getElementById('locationUrl').value
             };
 
             fetch(WEB_APP_URL, {
