@@ -22,118 +22,175 @@
     --radius: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); direction: rtl; }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0f2440 100%);
+    color: white; padding: 0; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto; padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header-brand { display: flex; align-items: center; gap: 12px; }
+  .header-logo-img { height: 52px; width: auto; border-radius: 8px; background: white; padding: 4px; }
+  .header-title { font-size: 17px; font-weight: 800; }
+  .header-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
   
-  /* الهيدر الأصلي الخاص بك */
-  header { background: var(--primary); padding: 20px 0; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
-  .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-  .logo-area { display: flex; align-items: center; gap: 15px; }
-  .logo-img { height: 60px; width: auto; background: var(--white); padding: 5px; border-radius: 8px; }
-  .logo-text { color: var(--white); }
-  .logo-text h1 { font-size: 1.4rem; font-weight: 700; }
-  .logo-text p { font-size: 0.85rem; color: #cbd5e1; }
-  
-  /* أزرار الهيدر الثلاثية الأصلية */
-  .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-  .btn-header { padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all 0.2s; color: white; border: none; }
-  .btn-whatsapp { background: #25D366; }
-  .btn-whatsapp:hover { background: #1ea855; }
-  .btn-paytabs { background: var(--orange); }
-  .btn-paytabs:hover { background: #a84a0d; }
-  .btn-admin { background: var(--teal); }
-  .btn-admin:hover { background: #0b5240; }
+  /* أزرارك الأصلية بالظبط */
+  .header-contact {
+    background: var(--accent); color: var(--primary); padding: 9px 16px; border-radius: 10px;
+    font-weight: 800; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+  }
+  .header-contact:hover { background: #f5c842; }
+  .header-donate {
+    background: #25D366; color: white; padding: 9px 16px; border-radius: 10px;
+    font-weight: 800; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+  }
+  .header-donate:hover { background: #1ea855; }
+  .header-paytabs {
+    background: var(--orange); color: white; padding: 9px 16px; border-radius: 10px;
+    font-weight: 800; font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: background 0.2s;
+  }
+  .header-paytabs:hover { background: #a84a0d; }
 
-  .hero { background: linear-gradient(135deg, #1A3E62 0%, #2E6B9E 100%); color: var(--white); padding: 50px 20px; text-align: center; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05); }
-  .hero h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; }
-  .hero p { font-size: 1.1rem; color: #e2e8f0; max-width: 600px; margin: 0 auto; margin-bottom: 30px; }
-  
-  /* العدادات الأصلية */
+  .donate-btn-paytabs {
+    width: 100%; padding: 11px; background: var(--orange); color: white; border: none; border-radius: 10px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; margin-top: 8px;
+  }
+  .donate-btn-paytabs:hover { background: #a84a0d; }
+  .donate-btn-whatsapp {
+    width: 100%; padding: 11px; background: #25D366; color: white; border: none; border-radius: 10px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; margin-top: 8px;
+  }
+  .donate-btn-whatsapp:hover { background: #1ea855; }
+
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--teal) 100%);
+    color: white; padding: 60px 24px; text-align: center;
+  }
+  .hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 16px; line-height: 1.3; }
+  .hero p { font-size: 16px; opacity: 0.85; max-width: 600px; margin: 0 auto 32px; line-height: 1.7; }
   .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-  .hero-stat { text-align: center; background: rgba(255,255,255,0.08); padding: 15px 30px; border-radius: 12px; backdrop-filter: blur(5px); min-width: 180px; }
-  .hero-stat-num { font-size: 2rem; font-weight: 900; color: var(--accent); display: block; }
-  .hero-stat-label { font-size: 0.9rem; color: #e2e8f0; margin-top: 4px; font-weight: 600; }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 36px; font-weight: 900; color: var(--accent); display: block; }
+  .hero-stat-label { font-size: 13px; opacity: 0.8; margin-top: 4px; }
 
-  .main-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 60px; }
-  .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+  /* الفلاتر الأصلية كاملة */
+  .filters-bar {
+    background: white; border-bottom: 1px solid var(--border); padding: 16px 24px;
+    position: sticky; top: 76px; z-index: 90; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .filters-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .filter-label { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+  .filter-btn {
+    padding: 8px 18px; border-radius: 20px; border: 2px solid var(--border); background: white;
+    cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-muted); transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
   
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
-  .case-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; border: 1px solid var(--border); opacity: 0; transform: translateY(20px); animation: fadeInUp 0.4s forwards; }
-  .case-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
-  
-  .case-card-top { padding: 20px 20px 10px; display: flex; justify-content: space-between; align-items: flex-start; }
-  .case-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-  .icon-sp { background: #ede9fe; color: #6d28d9; }
-  .icon-em { background: #f0fdf4; color: #16a34a; }
-  .icon-ro { background: #eff6ff; color: #2563eb; }
-  .icon-wa { background: #e0f2fe; color: #0369a1; }
-  .case-code { background: #f1f5f9; color: var(--primary); font-weight: 700; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); }
-  
-  .case-card-body { padding: 0 20px 20px; flex-grow: 1; display: flex; flex-direction: column; }
-  .case-service { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
-  .case-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
-  .case-desc { font-size: 0.95rem; color: #475569; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; background: #f8fafc; padding: 12px; border-radius: 8px; border-right: 3px solid #cbd5e1; }
-  
-  .case-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding-top: 10px; border-top: 1px dashed var(--border); }
-  .case-meta-item { font-size: 0.85rem; background: #f8fafc; padding: 4px 10px; border-radius: 6px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; border: 1px solid #f1f5f9; }
-  
-  .case-actions { display: flex; gap: 12px; margin-top: auto; }
-  .btn { flex: 1; padding: 12px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; text-align: center; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-primary { background: var(--teal); color: var(--white); box-shadow: 0 4px 12px rgba(15,110,86,0.2); }
-  .btn-primary:hover { background: #0c5744; }
-  .btn-outline { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
-  .btn-outline:hover { background: #f1f5f9; }
-  
-  .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-  .modal-content { background: var(--white); width: 100%; max-width: 600px; border-radius: var(--radius); box-shadow: var(--shadow-lg); overflow: hidden; position: relative; }
-  .modal-header { background: var(--primary); color: var(--white); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-  .modal-header h3 { font-size: 1.3rem; font-weight: 700; }
-  .close-modal { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; opacity: 0.8; }
-  .close-modal:hover { opacity: 1; }
-  .modal-body { padding: 25px; max-height: 70vh; overflow-y: auto; }
-  .modal-section { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
-  .modal-section:last-child { border: none; margin: 0; padding: 0; }
-  .modal-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
-  .modal-value { font-size: 1.05rem; color: var(--text); font-weight: 700; }
-  .modal-story { background: #f8fafc; padding: 15px; border-radius: 8px; border-right: 4px solid var(--accent); margin-top: 5px; font-size: 1rem; color: #334155; text-align: justify; }
-  
-  .loading-container { text-align: center; padding: 60px 0; grid-column: 1 / -1; }
-  .spinner { width: 50px; height: 50px; border: 5px solid #e2e8f0; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-  .loading-text { font-weight: 600; color: var(--primary); }
-  
-  .empty-state { text-align: center; padding: 60px 20px; grid-column: 1 / -1; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
-  .empty-icon { font-size: 3.5rem; margin-bottom: 15px; }
-  
-  /* الفوتر الأصلي الجميل الخاص بك */
-  footer { background: #0f2d4a; color: white; padding: 40px 20px; text-align: center; margin-top: 60px; border-top: 5px solid var(--teal); }
-  footer p { font-size: 0.9rem; opacity: 0.7; margin-top: 10px; }
-  .footer-logo { height: 70px; width: auto; margin-bottom: 15px; background: white; padding: 5px; border-radius: 8px; }
+  .search-wrap { flex: 1; min-width: 200px; position: relative; }
+  .search-wrap input {
+    width: 100%; padding: 9px 40px 9px 16px; border: 2px solid var(--border); border-radius: 20px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; outline: none; direction: rtl; transition: border 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--primary); }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
+  .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .loading { text-align: center; padding: 80px 20px; color: var(--text-muted); }
+  .spinner {
+    width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--primary);
+    border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .case-card {
+    background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; animation: fadeIn 0.4s ease both;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  
+  .case-card-top { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+  .case-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .icon-roof { background: #dbeafe; }
+  .icon-water { background: #d1fae5; }
+  .icon-project { background: #ede9fe; }
+  .icon-food { background: #fef3c7; }
+  .icon-other { background: #f1f5f9; }
+  
+  .case-code { font-family: monospace; font-size: 11px; background: #f1f5f9; padding: 4px 10px; border-radius: 8px; color: var(--primary); font-weight: 700; }
+  .case-card-body { padding: 16px 20px; flex: 1; }
+  .case-service { font-size: 11px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .case-title { font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 8px; line-height: 1.4; }
+  .case-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  
+  .case-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .case-meta-item { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  .case-card-footer { padding: 0 20px 20px; }
+
+  /* المودال الأصلي بتنسيقك */
+  .modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-content {
+    background: white; width: 100%; max-width: 500px; border-radius: var(--radius);
+    box-shadow: var(--shadow-lg); overflow: hidden; animation: modalOpen 0.3s ease;
+  }
+  @keyframes modalOpen { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-header { background: var(--primary); color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .modal-header h3 { font-size: 16px; font-weight: 800; }
+  .close-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+  .modal-body { padding: 20px; }
+  .modal-row { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 10px 0; font-size: 13px; }
+  .modal-row:last-child { border: none; }
+  .modal-label { font-weight: 700; color: var(--text-muted); }
+  .modal-value { font-weight: 600; color: var(--text); }
+  .modal-story { background: #f8fafc; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 13px; color: var(--text); line-height: 1.6; }
+
+  /* الفوتر الأصلي كما صممته تماماً */
+  footer { background: var(--primary); color: white; padding: 32px 24px; text-align: center; margin-top: 60px; }
+  footer p { font-size: 13px; opacity: 0.7; margin-top: 8px; }
+  .footer-logo { height: 60px; width: auto; margin-bottom: 12px; border-radius: 8px; background: white; padding: 6px; }
+
+  @media(max-width: 900px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width: 600px) {
+    .cases-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+    .hero-stats { gap: 24px; }
+    .filters-inner { gap: 8px; }
+    .header-inner { flex-wrap: wrap; gap: 8px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="nav-container">
-    <div class="logo-area">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAMAAAC9L2SFAAAASFBMVEVHcEwAAAAAnQAAnwAArQAAsAAAtgAAvwAAxwAA0QAA2wAA4wAA6wAA9wAA/wD///8AqtS9mZmZzMzM///M5szmzP//zGbMzMx3ZkoVAAAAAXRSTlMAQObYZgAAA6BJREFUeNrtl9tywyAMRUEuM8z//9pOS9NutpZInIBy36ZOnYgXbIdAnIsgCIIgCIIgCIIgCIKgl9Asm6w/XGf96mbyv7IisP54m6v7A6zXfXWJpS03wPrp6zXWW9f7AasFsC6xWp0ArAtYf6XvD7BqXWNdY7XpA1g9rEesXwGsNf0Aa9UFYFViPQ9Yf6bvD7B+6gZrfYv10zVYf6bvD7B++m/A+id9f4D1Z2B9g/XP9P0B1p9Yf9gK6zPr7b8Ba9MFYFVifR6w/kzfH2B99g3Wx6eKxPp7wPrpewDrdwBrsX8EwALWb9YCsID1m7UArG+wVvunp1gsYAFrg8UCFrDWWADWf7DkWKyXv8YCsID1WwALWL9ZC8AC1m/WArA2WCv6pxbAAtbS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uEwLWAArBsdicSyAFbMAYAGs3iwAWACrNwvAusQlY2ERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCzWaBYArBhsS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XgWIeXW38F1mEBrA9g7X9gXWKtdU6Z9clWWB8fWAsA60/vXgCWBKwtFoB1gUvGAtb6LhaAhbEALGB9AixgXb8XgAWshR0sgAWsnAAsYOWkYAErZwYsYAGsgAWwYnAsgAWwYhYALIAVswBgAayYBQArBsdiAayYBQALYMUsAFgAK2YBwAJYvVkAsABWbxaAdYlLxsIisFjAwsIisFjAwsIisFjAwsIisFjAwsIisFis0SwAWDHYEAtgxSwAWACrNwvAFsDqzQKwLnHJWMBaxgKwMBaAJSfHAtYyFoCFsQAsgBXDAljLWAAsgBXDAlgxOBbAAlgxCwAWwIpZALCWsWBxDIsFrE9eMhbmsFiYw2JhDouFOSwW5rBYmMNiYQ6LhTksFuaIwbFYmAcsgBWzAGABrJgFAAtg9WYBWFgEFotFwGIBi8ViEYDFAg7pD6S7IisCgscvCIIgCIIgCIIgCILgD/ED0vAt9677b0cAAAAASUVORK5CYII=" alt="شعار مؤسسة الإغاثة والطوارئ" class="logo-img">
-      <div class="logo-text">
-        <h1>مؤسسة الإغاثة والطوارئ</h1>
-        <p>معاً لمواجهة الأزمات ودعم المجتمعات الأكثر احتياجاً</p>
+  <div class="header-inner">
+    <div class="header-brand">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAMAAAC9L2SFAAAASFBMVEVHcEwAAAAAnQAAnwAArQAAsAAAtgAAvwAAxwAA0QAA2wAA4wAA6wAA9wAA/wD///8AqtS9mZmZzMzM///M5szmzP//zGbMzMx3ZkoVAAAAAXRSTlMAQObYZgAAA6BJREFUeNrtl9tywyAMRUEuM8z//9pOS9NutpZInIBy36ZOnYgXbIdAnIsgCIIgCIIgCIIgCIKgl9Asm6w/XGf96mbyv7IisP54m6v7A6zXfXWJpS03wPrp6zXWW9f7AasFsC6xW10ArAtYf6XvD7BqXWNdY7XpA1g9rEesXwGsNf0Aa9UFYFViPQ9Yf6bvD7B+6gZrfYv10zVYf6bvD7B++m/A+id9f4D1Z2B9g/XP9P0B1p9Yf9gK6zPr7b8Ba9MFYFVifR6w/kzfH2B99g3Wx6eKxPp7wPrpewDrdwBrsX8EwALWb9YCsID1m7UArG+wVvunp1gsYAFrg8UCFrDWWADWf7DkWKyXv8YCsID1WwALWL9ZC8AC1m/WArA2WCv6pxbAAtbS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uEwLWAArBsdicSyAFbMAYAGs3iwAWACrNwvAusQlY2ERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCzWaBYArBhsS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XgWIeXW38F1mEBrA9g7X9gXWKtdU6Z9clWWB8fWAsA60/vXgCWBKwtFoB1gUvGAtb6LhaAhbEALGB9AixgXb8XgAWshR0sgAWsnAAsYOWkYAErZwYsYAGsgAWwYnAsgAWwYhYALIAVswBgAayYBQArBsdiAayYBQALYMUsAFgAK2YBwAJYvVkAsABWbxaAdYlLxsIisFjAwsIisFjAwsIisFjAwsIisFjAwsIisFis0SwAWDHYEAtgxSwAWACrNwvAFsDqzQKwLnHJWMBaxgKwMBaAJSfHAtYyFoCFsQAsgBXDAljLWAAsgBXDAlgxOBbAAlgxCwAWwIpZALCWsWBxDIsFrE9eMhbmsFiYw2JhDouFOSwW5rBYmMNiYQ6LhTksFuaIwbFYmAcsgBWzAGABrJgFAAtg9WYBWFgEFotFwGIBi8ViEYDFAg7pD6S7IisCgscvCIIgCIIgCIIgCILgD/ED0vAt9677b0cAAAAASUVORK5CYII=" class="header-logo-img" alt="Logo">
+      <div>
+        <div class="header-title">مؤسسة الإغاثة والطوارئ</div>
+        <div class="header-sub">حالات تستحق الدعم والرعاية</div>
       </div>
     </div>
-    <div class="header-actions">
-      <a href="https://wa.me/201019183424" target="_blank" class="btn-header btn-whatsapp">💬 تواصل عبر واتساب</a>
-      <a href="#" class="btn-header btn-paytabs">💳 تبرع عبر الفيزا</a>
-      <a href="#" class="btn-header btn-admin">👤 تواصل مع الإدارة</a>
+    <div style="display:flex; gap:10px;">
+      <a href="https://wa.me/201019183424" target="_blank" class="header-donate">💬 تواصل عبر واتساب</a>
+      <a href="#" class="header-paytabs">💳 تبرع عبر الفيزا</a>
+      <a href="#" class="header-contact">👤 تواصل مع الإدارة</a>
     </div>
   </div>
 </header>
 
-<div class="hero">
-  <h2>بوابة الخير والإغاثة</h2>
-  <p>تبرعك الآن يساهم مباشرة في توفير حياة كريمة للأسر الأكثر استحقاقاً في كافة محافظات مصر.</p>
+<section class="hero">
+  <h1>من أحياها.. فكأنما أحيا الناس جميعاً</h1>
+  <p>ساهم معنا في دعم الحالات الأكثر احتياجاً وتوفير حياة كريمة لهم. تبرعك يصنع فارقاً حقيقياً في حياة أسر بأكملها.</p>
   <div class="hero-stats">
     <div class="hero-stat">
       <span class="hero-stat-num" id="total-cases">0</span>
@@ -144,196 +201,210 @@
       <span class="hero-stat-label">إجمالي الميزانية المطلوبة</span>
     </div>
   </div>
-</div>
+</section>
 
-<div class="main-container">
-  <div class="section-title">
-    <span>📋 الحالات العاجلة المتاحة حالياً</span>
-  </div>
-  
-  <div class="grid" id="casesGrid">
-    <div class="loading-container" id="loading">
-      <div class="spinner"></div>
-      <div class="loading-text">جاري تحميل الحالات المعتمدة...</div>
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">تصفية الحالات:</span>
+    <button class="filter-btn active" onclick="changeFilter('all', this)">الكل</button>
+    <button class="filter-btn" onclick="changeFilter('سقف', this)">أسقف وأعمدة</button>
+    <button class="filter-btn" onclick="changeFilter('مياه', this)">وصلات مياه</button>
+    <button class="filter-btn" onclick="changeFilter('تمكين', this)">تمكين اقتصادي</button>
+    <button class="filter-btn" onclick="changeFilter('كرتونة', this)">دعم غذائي</button>
+    
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="بحث بكود الحالة أو المحافظة..." oninput="handleSearch()">
+      <span class="search-icon">🔍</span>
     </div>
   </div>
 </div>
+
+<main class="main">
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>جاري تحميل الحالات الإنسانية...</p>
+  </div>
+  <div id="cases-grid" class="cases-grid" style="display:none;"></div>
+</main>
 
 <div class="modal" id="caseModal">
   <div class="modal-content">
     <div class="modal-header">
       <h3 id="modalTitle">تفاصيل الحالة</h3>
-      <button class="close-modal" onclick="closeModal()">&times;</button>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
 <footer>
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAMAAAC9L2SFAAAASFBMVEVHcEwAAAAAnQAAnwAArQAAsAAAtgAAvwAAxwAA0QAA2wAA4wAA6wAA9wAA/wD///8AqtS9mZmZzMzM///M5szmzP//zGbMzMx3ZkoVAAAAAXRSTlMAQObYZgAAA6BJREFUeNrtl9tywyAMRUEuM8z//9pOS9NutpZInIBy36ZOnYgXbIdAnIsgCIIgCIIgCIIgCIKgl9Asm6w/XGf96mbyv7IisP54m6v7A6zXfXWJpS03wPrp6zXWW9f7AasFsC6xW10ArAtYf6XvD7BqXWNdY7XpA1g9rEesXwGsNf0Aa9UFYFViPQ9Yf6bvD7B+6gZrfYv10zVYf6bvD7B++m/A+id9f4D1Z2B9g/XP9P0B1p9Yf9gK6zPr7b8Ba9MFYFVifR6w/kzfH2B99g3Wx6eKxPp7wPrpewDrdwBrsX8EwALWb9YCsID1m7UArG+wVvunp1gsYAFrg8UCFrDWWADWf7DkWKyXv8YCsID1WwALWL9ZC8AC1m/WArA2WCv6pxbAAtbS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uF8i6XkWN5w1uEwLWAArBsdicSyAFbMAYAGs3iwAWACrNwvAusQlY2ERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCxgYWERWCzWaBYArBhsS6v7XWAAr76f/M9YisP5+9vF0i6XkWN5w1uF8i6XgWIeXW38F1mEBrA9g7X9gXWKtdU6Z9clWWB8fWAsA60/vXgCWBKwtFoB1gUvGAtb6LhaAhbEALGB9AixgXb8XgAWshR0sgAWsnAAsYOWkYAErZwYsYAGsgAWwYnAsgAWwYhYALIAVswBgAayYBQArBsdiAayYBQALYMUsAFgAK2YBwAJYvVkAsABWbxaAdYlLxsIisFjAwsIisFjAwsIisFjAwsIisFjAwsIisFis0SwAWDHYEAtgxSwAWACrNwvAFsDqzQKwLnHJWMBaxgKwMBaAJSfHAtYyFoCFsQAsgBXDAljLWAAsgBXDAlgxOBbAAlgxCwAWwIpZALCWsWBxDIsFrE9eMhbmsFiYw2JhDouFOSwW5rBYmMNiYQ6LhTksFuaIwbFYmAcsgBWzAGABrJgFAAtg9WYBWFgEFotFwGIBi8ViEYDFAg7pD6S7IisCgscvCIIgCIIgCIIgCILgD/ED0vAt9677b0cAAAAASUVORK5CYII=" class="footer-logo" alt="مؤسسة الإغاثة والطوارئ"><br>
+  <img src="data:image/png;base64,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" class="footer-logo" alt="Logo"><br>
   <strong>مؤسسة الإغاثة والطوارئ</strong>
-  <p>بوابة التبرعات للحالات الإنسانية الشريكة والمستهدفة ميدانياً</p>
-  <p>© جميع الحقوق محفوظة لمؤسسة الإغاثة والطوارئ لعام 2026</p>
+  <p>© جميع الحقوق محفوظة لعام 2026</p>
 </footer>
 
 <script>
-// الرابط الأصلي والصحيح لـ API قاعدة البيانات
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec";
-let allCases = [];
+  // استدعاء رابط قاعدة البيانات الأصلي الخاص بك
+  const url = 'https://script.google.com/macros/s/AKfycby_TzDiRCE75n9kAmsYJ1_cR9B0peXNhrcxCFkCqnLFI217d0cu5Hi_-VB17sF48iXk/exec';
+  let allCases = [];
+  let currentFilter = 'all';
 
-async function loadCases() {
-  const grid = document.getElementById('casesGrid');
-  try {
-    const res = await fetch(SHEET_URL);
-    const data = await res.json();
+  async function fetchCases() {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      // الفلترة الأصلية الخاصة بك بناءً على وجود نص في خانة المراجعة reviewNotes
+      allCases = data.filter(c => c.reviewNotes && c.reviewNotes.trim() !== "");
+      
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('cases-grid').style.display = 'grid';
+      
+      renderCases(allCases);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      document.getElementById('loading').innerHTML = '<p style="color:var(--orange); font-weight:700;">عذراً، فشل تحميل البيانات. يرجى إعادة المحاولة لاحقاً.</p>';
+    }
+  }
+
+  // تصحيح حساب العدادات بأمان تام لمنع الـ NaN
+  function updateStats() {
+    if (!allCases || allCases.length === 0) return;
     
-    // فلترة الحالات لتعمل فقط بناءً على كتابة "ملاحظات المراجع" في الشيت بدون تعديل أسامي حقولك الأصلية
-    allCases = data.map(row => {
-      return {
-        code: row["الكود"] || row["كود الحالة"] || '',
-        service: row["تصنيف الخدمة والتدخل المطلوب الأساسي للحالة"] || '',
-        gov: row["المحافظة"] || '',
-        family: row["عدد أفراد الأسرة المقيمين مع الحالة"] || '',
-        partner: row["اسم الجمعية الشريكة بالكامل"] || '',
-        summary: row["نص نثري مختصر جداً يوضح ملخص الحالة والظروف الميدانية والاجتماعية"] || '',
-        budget: row["الميزانية"] || row["المبلغ"] || '0', 
-        reviewnotes: row["ملاحظات المراجع"] || row["ملاحظات المراجعة"] || ''
-      };
-    }).filter(c => c.reviewnotes && c.reviewnotes.trim() !== ""); // الفلتر يبحث عن أي خانة مراجعة ممتلئة
+    document.getElementById('total-cases').textContent = allCases.length;
+    
+    // تنظيف المبالغ من أي نصوص أو فواصل قبل جمعها لتعمل بشكل سليم
+    const totalBudget = allCases.reduce((sum, c) => {
+      if (!c.budget) return sum;
+      const cleanValue = c.budget.toString().replace(/[^\d]/g, ''); 
+      const budgetNumber = parseInt(cleanValue, 10);
+      return sum + (isNaN(budgetNumber) ? 0 : budgetNumber);
+    }, 0);
 
+    document.getElementById('total-budget').textContent = totalBudget.toLocaleString('ar-EG') + ' ج.م';
+  }
+
+  function renderCases(casesArray) {
+    const grid = document.getElementById('cases-grid');
     grid.innerHTML = '';
-    
-    if (allCases.length === 0) {
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">🤝</div>
-          <h3 style="font-weight:700; color:var(--primary);">لا توجد حالات معروضة حالياً</h3>
-          <p style="color:var(--text-muted); margin-top:10px;">تمت تلبية جميع الحالات وجاري مراجعة حالات جديدة من إدارة المؤسسة.</p>
-        </div>`;
+
+    if(casesArray.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted); font-weight:700;">لا توجد حالات تطابق الاختيار حالياً.</div>';
       return;
     }
 
-    // رسم كروت الحالات بناءً على بياناتك
-    allCases.forEach((c, i) => {
-      let icon = '📦', iconClass = 'icon-sp';
-      if (c.service.includes('إعمار')) { icon = '🏠'; iconClass = 'icon-em'; }
-      else if (c.service.includes('سقف')) { icon = '🪵'; iconClass = 'icon-ro'; }
-      else if (c.service.includes('وصلة مياه')) { icon = '🚰'; iconClass = 'icon-wa'; }
-      else if (c.service.includes('مشروع')) { icon = '💼'; iconClass = 'icon-sp'; }
+    casesArray.forEach((c, i) => {
+      let icon = '🤝';
+      let iconClass = 'icon-other';
+      const service = (c.service || '').toLowerCase();
 
-      const story = c.summary || 'حالة مستحقة تحتاج إلى دعمك الكريم لضمان حياة كريمة ولائقة.';
+      if(service.includes('سقف') || service.includes('بناء')) { icon = '🏠'; iconClass = 'icon-roof'; }
+      else if(service.includes('مياه') || service.includes('حفر')) { icon = '🚰'; iconClass = 'icon-water'; }
+      else if(service.includes('تمكين') || service.includes('مشروع')) { icon = '💼'; iconClass = 'icon-project'; }
+      else if(service.includes('غذاء') || service.includes('كرتونة')) { icon = '📦'; iconClass = 'icon-food'; }
+
+      const story = c.summary || 'حالة إنسانية تستحق الدعم والرعاية، تحتاج إلى دعمكم الكريم لضمان حياة مستقرة وعفيفة.';
       const storyShort = story.length > 120 ? story.substring(0, 120) + '...' : story;
-      const waMsg = encodeURIComponent(`أريد التبرع للحالة:\nالكود: ${c.code}\nالخدمة: ${c.service}\nالمحافظة: ${c.gov}`);
-      
+
       const card = `
-      <div class="case-card" style="animation-delay:${i*0.05}s">
-        <div class="case-card-top">
-          <div class="case-icon ${iconClass}">${icon}</div>
-          ${c.code ? `<span class="case-code">${c.code}</span>` : ''}
-        </div>
-        <div class="case-card-body">
-          <div class="case-service">${c.service || 'خدمة إغاثية'}</div>
-          <div class="case-title">${c.service.split('(')[0] || 'حالة إنسانية'} · ${c.gov || 'جمهورية مصر'}</div>
-          <div class="case-desc">${storyShort}</div>
-          <div class="case-meta">
-            ${c.gov ? `<div class="case-meta-item">📍 ${c.gov}</div>` : ''}
-            ${c.family ? `<div class="case-meta-item">👨‍👩‍👧 ${c.family} أفراد</div>` : ''}
-            ${c.partner ? `<div class="case-meta-item">🤝 ${c.partner}</div>` : ''}
+        <div class="case-card" style="animation-delay:${i * 0.05}s">
+          <div class="case-card-top">
+            <div class="case-icon ${iconClass}">${icon}</div>
+            ${c.code ? `<span class="case-code">${c.code}</span>` : ''}
           </div>
-          <div class="case-actions">
-            <button class="btn btn-outline" onclick="openModal(${i})">التفاصيل</button>
-            <a href="https://wa.me/201019183424?text=${waMsg}" target="_blank" class="btn btn-primary">تبرع الآن</a>
+          <div class="case-card-body">
+            <div class="case-service">${c.service || 'خدمة إغاثية'}</div>
+            <div class="case-title">${c.service || 'حالة'} · ${c.gov || 'محافظة'}</div>
+            <div class="case-desc">${storyShort}</div>
+            <div class="case-meta">
+              ${c.gov ? `<div class="case-meta-item">📍 ${c.gov}</div>` : ''}
+              ${c.family ? `<div class="case-meta-item">👨‍👩‍👧 ${c.family} أفراد</div>` : ''}
+              ${c.partner ? `<div class="case-meta-item">🤝 ${c.partner}</div>` : ''}
+            </div>
+          </div>
+          <div class="case-card-footer">
+            <button class="donate-btn-paytabs" onclick="openModal(${i})">👁️ عرض كامل التفاصيل</button>
           </div>
         </div>
-      </div>`;
-      grid.insertAdjacentHTML('beforeend', card);
+      `;
+      grid.innerHTML += card;
     });
-
-  } catch (err) {
-    console.error(err);
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">⚠️</div>
-        <h3 style="font-weight:700; color:var(--orange);">فشل تحميل البيانات</h3>
-        <p style="color:var(--text-muted); margin-top:10px;">يرجى التحقق من اتصالك بالإنترنت وتحديث الصفحة مجدداً.</p>
-      </div>`;
   }
-}
 
-// دالة تحديث العدادات بأمان تام بدون توقف الصفحة
-function updateStats() {
-  if (!allCases || allCases.length === 0) {
-    document.getElementById('total-cases').textContent = "0";
-    document.getElementById('total-budget').textContent = "0 ج.م";
-    return;
+  function changeFilter(filterValue, btnElement) {
+    currentFilter = filterValue;
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+    applyFilterAndSearch();
   }
-  
-  // تحديث عدد الحالات
-  document.getElementById('total-cases').textContent = allCases.length;
-  
-  // حساب الميزانية مع تنظيف النصوص لمنع ظهور الـ NaN
-  const totalBudget = allCases.reduce((sum, c) => {
-    if (!c.budget) return sum;
-    const cleanValue = c.budget.toString().replace(/[^\d]/g, ''); // إزالة أي علامات أو فواصل نصوص
-    const budgetNumber = parseInt(cleanValue, 10);
-    return sum + (isNaN(budgetNumber) ? 0 : budgetNumber);
-  }, 0);
 
-  document.getElementById('total-budget').textContent = totalBudget.toLocaleString('ar-EG') + ' ج.م';
-}
+  function handleSearch() {
+    applyFilterAndSearch();
+  }
 
-function openModal(idx) {
-  const c = allCases[idx];
-  document.getElementById('modalTitle').innerText = `تفاصيل الحالة كود: ${c.code || 'غير متوفر'}`;
-  
-  const bodyHtml = `
-    <div class="modal-section">
-      <div class="modal-label">الخدمة المطلوبة والتدخل الأساسي</div>
-      <div class="modal-value">${c.service || 'غير محدد'}</div>
-    </div>
-    <div class="modal-section" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-      <div>
-        <div class="modal-label">المحافظة</div>
-        <div class="modal-value">📍 ${c.gov || 'غير محدد'}</div>
-      </div>
-      <div>
-        <div class="modal-label">عدد أفراد الأسرة</div>
-        <div class="modal-value">👨‍👩‍👧 ${c.family || 'غير محدد'} أفراد</div>
-      </div>
-    </div>
-    <div class="modal-section">
-      <div class="modal-label">الجمعية الشريكة المسؤولة عن الحالة</div>
-      <div class="modal-value">🤝 ${c.partner || 'غير محدد'}</div>
-    </div>
-    <div class="modal-section">
-      <div class="modal-label">القصة والوضع الاجتماعي الميداني للحالة</div>
-      <div class="modal-story">${c.summary || 'لا يوجد وصف نثري للحالة.'}</div>
-    </div>
-    <div class="modal-section" style="margin-top:25px;">
-      <a href="https://wa.me/201019183424?text=${encodeURIComponent('أريد التبرع للحالة كود: ' + c.code)}" target="_blank" class="btn btn-primary" style="width:100%;">تواصل عبر واتساب للتبرع للحالة</a>
-    </div>
-  `;
-  
-  document.getElementById('modalBody').innerHTML = bodyHtml;
-  document.getElementById('caseModal').style.display = 'flex';
-}
+  function applyFilterAndSearch() {
+    const searchText = document.getElementById('search-input').value.trim().toLowerCase();
+    let filtered = allCases;
 
-function closeModal() {
-  document.getElementById('caseModal').style.display = 'none';
-}
+    if (currentFilter !== 'all') {
+      filtered = filtered.filter(c => (c.service || '').toLowerCase().includes(currentFilter));
+    }
 
-window.onclick = function(event) {
-  const modal = document.getElementById('caseModal');
-  if (event.target == modal) closeModal();
-}
+    if (searchText) {
+      filtered = filtered.filter(c => 
+        (c.code || '').toLowerCase().includes(searchText) || 
+        (c.gov || '').toLowerCase().includes(searchText) ||
+        (c.service || '').toLowerCase().includes(searchText)
+      );
+    }
 
-// الترتيب الصحيح والآمن للاستدعاء لمنع توقف تحميل بقية الصفحة والفوتر
-async function initPage() {
-  await loadCases();  // أولاً: يتم جلب البيانات والفلترة
-  updateStats();     // ثانياً: يتم حساب العدادات بدقة وعرضها
-}
+    renderCases(filtered);
+  }
 
-document.addEventListener('DOMContentLoaded', initPage);
+  function openModal(index) {
+    // جلب الحالات المفلترة حالياً لفتح الحالة الصحيحة بالظبط
+    const searchText = document.getElementById('search-input').value.trim().toLowerCase();
+    let currentList = allCases;
+    if (currentFilter !== 'all') currentList = currentList.filter(c => (c.service || '').toLowerCase().includes(currentFilter));
+    if (searchText) currentList = currentList.filter(c => (c.code || '').toLowerCase().includes(searchText) || (c.gov || '').toLowerCase().includes(searchText));
+    
+    const c = currentList[index];
+    if(!c) return;
+
+    document.getElementById('modalTitle').textContent = `تفاصيل الحالة كود: ${c.code || 'غير محدد'}`;
+    
+    const waMsg = encodeURIComponent(`أريد التبرع للحالة:\nالكود: ${c.code}\nالخدمة: ${c.service}\nالمحافظة: ${c.gov}`);
+    
+    const body = document.getElementById('modalBody');
+    body.innerHTML = `
+      <div class="modal-row"><span class="modal-label">نوع التدخل:</span><span class="modal-value">${c.service}</span></div>
+      <div class="modal-row"><span class="modal-label">المحافظة:</span><span class="modal-value">${c.gov}</span></div>
+      <div class="modal-row"><span class="modal-label">عدد أفراد الأسرة:</span><span class="modal-value">${c.family} أفراد</span></div>
+      <div class="modal-row"><span class="modal-label">الجمعية الشريكة:</span><span class="modal-value">${c.partner}</span></div>
+      <div class="modal-row"><span class="modal-label">الميزانية المطلوبة:</span><span class="modal-value" style="color:var(--orange)">${c.budget} ج.م</span></div>
+      <div class="modal-story"><strong>الوضع الاجتماعي الميداني:</strong><br>${c.summary || 'لا يوجد وصف متاح.'}</div>
+      <a href="https://wa.me/201019183424?text=${waMsg}" target="_blank" class="donate-btn-whatsapp" style="margin-top:15px; text-align:center;">💬 كفل الحالة عبر واتساب</a>
+    `;
+    
+    document.getElementById('caseModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('caseModal').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('caseModal');
+    if (event.target == modal) closeModal();
+  }
+
+  // التهيئة المرتّبة والآمنة لتشغيل الصفحة والعداد والفوتر معاً
+  async function initPage() {
+    await fetchCases();
+    updateStats();
+  }
+
+  document.addEventListener('DOMContentLoaded', initPage);
 </script>
 </body>
 </html>
