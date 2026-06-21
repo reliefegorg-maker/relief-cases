@@ -1,99 +1,421 @@
-// ================================================================
-// Apps Script — مؤسسة الإغاثة والطوارئ
-// الأعمدة مطابقة 100% للشيت
-// ================================================================
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة الجمعيات الشريكة — مؤسسة الإغاثة والطوارئ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--pr:#1F4E79;--pr2:#2563a8;--teal:#0F6E56;--bg:#f0f4f8;--txt:#1e293b;--muted:#64748b;--brd:#e2e8f0;--red:#dc2626;--sh:0 4px 24px rgba(26,58,92,.10);--rd:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Cairo",sans-serif;background:var(--bg);color:var(--txt);direction:rtl;min-height:100vh}
+header{background:linear-gradient(135deg,var(--pr) 0%,#0f2440 100%);color:#fff;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.hi{max-width:900px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:14px}
+.ht{font-size:18px;font-weight:800;line-height:1.3}
+.hs{font-size:12px;opacity:.72;margin-top:3px}
+.hero{background:linear-gradient(135deg,var(--teal) 0%,#0a4a38 100%);color:#fff;padding:22px 24px;text-align:center}
+.hero h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.85;max-width:600px;margin:0 auto;line-height:1.7}
+.gl{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(255,255,255,.15);color:#fff;padding:8px 18px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:700}
+.gl:hover{background:rgba(255,255,255,.25)}
+.main{max-width:900px;margin:0 auto;padding:28px 20px 50px}
+.card{background:#fff;border-radius:var(--rd);box-shadow:var(--sh);overflow:hidden;margin-bottom:20px}
+.ch{background:var(--pr);color:#fff;padding:14px 22px;display:flex;align-items:center;gap:10px}
+.ch span{font-size:20px}
+.ch h3{font-size:15px;font-weight:800}
+.cb{padding:22px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.full{grid-column:1/-1}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fg label{font-size:13px;font-weight:700;color:var(--txt);transition:color .2s}
+.req{color:var(--red);margin-right:2px}
+.hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:2px}
+.fi{padding:10px 14px;border:2px solid var(--brd);border-radius:10px;font-family:"Cairo",sans-serif;font-size:14px;outline:none;direction:rtl;transition:border .2s,box-shadow .2s;background:#fff;width:100%}
+.fi:focus{border-color:var(--pr2);box-shadow:0 0 0 3px rgba(37,99,168,.1)}
+.fi::placeholder{color:#94a3b8}
+textarea.fi{resize:vertical;min-height:90px}
+/* errors */
+.fi.err{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(220,38,38,.12)!important;background:#fff8f8}
+.fg.err>label{color:var(--red)}
+.rw.err{outline:2px solid var(--red);border-radius:10px;padding:6px 8px}
+.em{font-size:11px;color:var(--red);font-weight:700;margin-top:3px;display:none}
+.em.show{display:block}
+/* radio */
+.rg{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.ro input{display:none}
+.ro label{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:2px solid var(--brd);border-radius:20px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .15s}
+.ro input:checked+label{background:var(--pr);color:#fff;border-color:var(--pr)}
+.ro label:hover{border-color:var(--pr2);color:var(--pr)}
+/* alerts */
+.al{padding:14px 18px;border-radius:10px;font-size:14px;font-weight:600;margin-bottom:20px;display:none}
+.al-w{background:#fff7ed;border:2px solid #fdba74;color:#9a3412}
+.al-s{background:#f0fdf4;border:2px solid #86efac;color:#166534}
+.al-e{background:#fef2f2;border:2px solid #fca5a5;color:#991b1b}
+/* submit */
+.sc{text-align:center;padding:10px 0 0}
+.sb{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;background:var(--pr);color:#fff;border:none;border-radius:12px;font-family:"Cairo",sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(31,78,121,.3)}
+.sb:hover{background:var(--pr2);transform:translateY(-2px)}
+.sb:disabled{background:#94a3b8;cursor:not-allowed;transform:none;box-shadow:none}
+.sp{width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{background:var(--pr);color:#fff;padding:30px 24px;text-align:center;margin-top:40px}
+footer .fn{font-size:16px;font-weight:800;margin-bottom:6px}
+footer p{font-size:12px;opacity:.7;margin-top:5px}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}.ht{font-size:15px}}
+</style>
+</head>
+<body>
 
-function doPost(e) {
-  try {
-    var ss    = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = ss.getSheetByName('ردود النموذج 1');
-    var data  = JSON.parse(e.postData.contents);
+<header>
+  <div class="hi">
+    <div>
+      <div class="ht">مؤسسة الإغاثة والطوارئ</div>
+      <div class="hs">بوابة الجمعيات الشريكة — تسجيل الحالات المستفيدة</div>
+    </div>
+  </div>
+</header>
 
-    // الكود يتولد قبل appendRow
-    var seq    = String(sheet.getLastRow()).padStart(3, '0');
-    var now    = new Date();
-    var month  = now.getMonth() + 1;
-    var year   = String(now.getFullYear()).slice(-2);
-    var prefix = 'RE';
-    var svc    = data.service || '';
-    if      (svc.indexOf('مشروع صغير') !== -1)                            prefix = 'SP';
-    else if (svc.indexOf('إعمار') !== -1 || svc.indexOf('اعمار') !== -1)  prefix = 'EM';
-    else if (svc.indexOf('ترميم') !== -1)                                   prefix = 'RN';
-    else if (svc.indexOf('سقف')   !== -1)                                   prefix = 'RF';
-    else if (svc.indexOf('مياه')  !== -1 || svc.indexOf('مياة')  !== -1)   prefix = 'WT';
-    else if (svc.indexOf('غذائية') !== -1)                                  prefix = 'FD';
-    var code = prefix + '/' + getGovCode(data.gov||'') + '/' + month + '/' + year + '/' + seq;
+<div class="hero">
+  <h2>📋 استمارة تقديم حالة مستفيدة جديدة</h2>
+  <p>خاص بالجمعيات الشريكة والمنسقين الميدانيين · يرجى ملء جميع البيانات بدقة</p>
+  <a href="https://drive.google.com/file/d/1DKP28tXQZF1zu2YqdWLsgX6M57uMek8L/view?usp=drive_link" target="_blank" class="gl">📖 دليل التشغيل</a>
+</div>
 
-    // الصف كامل 40 خانة — مطابق للشيت عمود بعمود
-    var row = [
-      new Date(),                   // A  (1)  Timestamp
-      data.email          || '',    // B  (2)  Email Address
-      data.partner        || '',    // C  (3)  اسم الجهة
-      data.coordinator    || '',    // D  (4)  اسم المنسق
-      data.coordPhone     || '',    // E  (5)  تليفون المنسق
-      data.name           || '',    // F  (6)  اسم الحالة
-      data.spouse         || '',    // G  (7)  اسم الزوج/ة
-      data.gender         || '',    // H  (8)  النوع
-      data.socialStatus   || '',    // I  (9)  التصنيف الاجتماعي
-      data.nid            || '',    // J  (10) الرقم القومي
-      data.casePhone      || '',    // K  (11) رقم الهاتف
-      data.family         || '',    // L  (12) عدد أفراد الأسرة
-      data.work           || '',    // M  (13) العمل / مصدر الدخل
-      data.gov            || '',    // N  (14) المحافظة
-      data.center         || '',    // O  (15) المركز
-      data.village        || '',    // P  (16) القرية
-      data.service        || '',    // Q  (17) نوع الخدمة
-      data.houseDesc      || '',    // R  (18) وصف المنزل
-      data.intervention   || '',    // S  (19) التدخل المطلوب
-      data.story          || '',    // T  (20) وصف الحالة
-      data.budget         || '',    // U  (21) تقدير التكلفة
-      data.docsReady      || '',    // V  (22) الأوراق جاهزة؟
-      data.quotationReady || '',    // W  (23) المقايسة جاهزة؟
-      data.photosReady    || '',    // X  (24) الصور جاهزة؟
-      data.driveLink      || '',    // Y  (25) لينك الأوراق PDF
-      data.quotationLink  || '',    // Z  (26) لينك المقايسة
-      data.location       || '',    // AA (27) لوكشين المكان
-      code,                         // AB (28) الكود (تلقائي)
-      '',                           // AC (29) تمت المراجعة
-      '',                           // AD (30) ملاحظات المراجع
-      '',                           // AE (31) توصيات المراجع
-      '',                           // AF (32) المبلغ المعتمد
-      '',                           // AG (33) اعتماد التمويل
-      '',                           // AH (34) جاهز للتبرع
-      '',                           // AI (35) اسم المتبرع
-      '',                           // AJ (36) للتنفيذ الفعلي
-      '',                           // AK (37) استلام الحالة للأعمال
-      '',                           // AL (38) الإغلاق والتقرير
-      'مقترح',                      // AM (39) المرحلة الحالية
-      '',                           // AN (40) ملاحظات الإدارة
-    ];
+<div class="main">
+  <div class="al al-w" id="alW">⚠️ يرجى ملء جميع الحقول الإلزامية المميزة بالأحمر.</div>
+  <div class="al al-s" id="alS">✅ تم إرسال بيانات الحالة بنجاح! سيتم التواصل معك خلال 3-5 أيام عمل.</div>
+  <div class="al al-e" id="alE">⚠️ حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.</div>
 
-    sheet.appendRow(row);
+  <form id="frm" novalidate>
 
-    // تلوين خلية الكود AB
-    var r = sheet.getLastRow();
-    sheet.getRange(r, 28).setBackground('#E8F4FD').setFontWeight('bold').setFontColor('#1F4E79');
+    <!-- 1: بيانات الجمعية -->
+    <div class="card">
+      <div class="ch"><span>🤝</span><h3>بيانات الجمعية الشريكة والمسؤول</h3></div>
+      <div class="cb">
+        <div class="g2">
+          <div class="fg" id="fg1"><label>البريد الإلكتروني <span class="req">*</span></label>
+            <input class="fi" id="f1" type="email" placeholder="example@gmail.com">
+            <span class="em" id="e1">⚠ هذا الحقل إلزامي</span></div>
 
-    return ContentService
-      .createTextOutput(JSON.stringify({success:true, code:code}))
-      .setMimeType(ContentService.MimeType.JSON);
+          <div class="fg" id="fg2"><label>اسم الجهة المسؤولة عن التنفيذ / الجمعية الشريكة <span class="req">*</span></label>
+            <input class="fi" id="f2" type="text" placeholder="الاسم الرسمي للجمعية">
+            <span class="em" id="e2">⚠ هذا الحقل إلزامي</span></div>
 
-  } catch(err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({success:false, error:err.toString()}))
-      .setMimeType(ContentService.MimeType.JSON);
+          <div class="fg" id="fg3"><label>اسم المنسق المسؤول عن ملف الحالة <span class="req">*</span></label>
+            <input class="fi" id="f3" type="text" placeholder="الاسم الكامل">
+            <span class="em" id="e3">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg" id="fg4"><label>تليفون المنسق المسؤول <span class="req">*</span></label>
+            <input class="fi" id="f4" type="tel" placeholder="01xxxxxxxxx">
+            <span class="em" id="e4">⚠ هذا الحقل إلزامي</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: بيانات الحالة -->
+    <div class="card">
+      <div class="ch"><span>👤</span><h3>البيانات الأساسية للحالة المستفيدة</h3></div>
+      <div class="cb">
+        <div class="g2">
+          <div class="fg" id="fg5"><label>اسم الحالة رباعي كما في البطاقة <span class="req">*</span></label>
+            <input class="fi" id="f5" type="text" placeholder="الاسم الرباعي">
+            <span class="em" id="e5">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg" id="fg6"><label>اسم الزوج / الزوجة <span class="req">*</span></label>
+            <input class="fi" id="f6" type="text" placeholder="اسم الزوج أو الزوجة">
+            <span class="em" id="e6">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg" id="fg7"><label>النوع <span class="req">*</span></label>
+            <div class="rw" id="rw7">
+              <div class="rg">
+                <div class="ro"><input type="radio" name="gender" id="gm" value="ذكر"><label for="gm">👨 ذكر</label></div>
+                <div class="ro"><input type="radio" name="gender" id="gf" value="أنثى"><label for="gf">👩 أنثى</label></div>
+              </div>
+            </div>
+            <span class="em" id="e7">⚠ يرجى الاختيار</span></div>
+
+          <div class="fg" id="fg8"><label>تصنيف الحالة الاجتماعية <span class="req">*</span></label>
+            <select class="fi" id="f8">
+              <option value="" disabled selected>اختر التصنيف</option>
+              <option>أرملة</option><option>مطلقة</option><option>امرأة معيلة</option>
+              <option>حالة فقر</option><option>عجز / مرض / مسنين</option><option>أيتام</option>
+            </select>
+            <span class="em" id="e8">⚠ يرجى الاختيار</span></div>
+
+          <div class="fg" id="fg9"><label>الرقم القومي للحالة <span class="req">*</span></label>
+            <input class="fi" id="f9" type="text" placeholder="14 رقم" maxlength="14">
+            <span class="em" id="e9">⚠ يجب أن يكون 14 رقماً</span></div>
+
+          <div class="fg" id="fg10"><label>رقم الهاتف للحالة <span class="req">*</span></label>
+            <input class="fi" id="f10" type="tel" placeholder="01xxxxxxxxx">
+            <span class="em" id="e10">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg" id="fg11"><label>عدد أفراد الأسرة <span class="req">*</span></label>
+            <input class="fi" id="f11" type="number" placeholder="عدد الأفراد" min="1">
+            <span class="em" id="e11">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg" id="fg12"><label>العمل / مصدر الدخل وقيمته <span class="req">*</span></label>
+            <input class="fi" id="f12" type="text" placeholder="مثال: عامل يومية / لا يعمل">
+            <span class="em" id="e12">⚠ هذا الحقل إلزامي</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: الموقع -->
+    <div class="card">
+      <div class="ch"><span>📍</span><h3>بيانات الموقع الجغرافي</h3></div>
+      <div class="cb">
+        <div class="g3">
+          <div class="fg" id="fg13"><label>المحافظة <span class="req">*</span></label>
+            <select class="fi" id="f13">
+              <option value="" disabled selected>اختر</option>
+              <option>القاهرة</option><option>الجيزة</option><option>القليوبية</option>
+              <option>الإسكندرية</option><option>البحيرة</option><option>الغربية</option>
+              <option>كفر الشيخ</option><option>المنوفية</option><option>الدقهلية</option>
+              <option>دمياط</option><option>الشرقية</option><option>بورسعيد</option>
+              <option>الإسماعيلية</option><option>السويس</option><option>شمال سيناء</option>
+              <option>جنوب سيناء</option><option>الفيوم</option><option>بني سويف</option>
+              <option>المنيا</option><option>أسيوط</option><option>سوهاج</option>
+              <option>قنا</option><option>الأقصر</option><option>أسوان</option>
+              <option>مطروح</option><option>الوادي الجديد</option><option>البحر الأحمر</option>
+            </select>
+            <span class="em" id="e13">⚠ يرجى الاختيار</span></div>
+
+          <div class="fg" id="fg14"><label>المركز <span class="req">*</span></label>
+            <input class="fi" id="f14" type="text" placeholder="اسم المركز">
+            <span class="em" id="e14">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg" id="fg15"><label>القرية / العنوان <span class="req">*</span></label>
+            <input class="fi" id="f15" type="text" placeholder="القرية والعنوان">
+            <span class="em" id="e15">⚠ هذا الحقل إلزامي</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: التدخل -->
+    <div class="card">
+      <div class="ch"><span>🏠</span><h3>تفاصيل التدخل والخدمة المطلوبة</h3></div>
+      <div class="cb">
+        <div class="g2">
+          <div class="fg" id="fg16"><label>نوع الخدمة / التدخل <span class="req">*</span></label>
+            <select class="fi" id="f16">
+              <option value="" disabled selected>اختر</option>
+              <option value="سقف">سقف</option>
+              <option value="وصلة مياة">وصلة مياه</option>
+              <option value="مشروع صغير">مشروع صغير</option>
+              <option value="اعمار اعادة بناء كامل">إعمار / إعادة بناء كامل</option>
+              <option value="ترميم">ترميم</option>
+              <option value="مواد غذائية">مواد غذائية</option>
+              <option value="أخرى">أخرى</option>
+            </select>
+            <span class="em" id="e16">⚠ يرجى الاختيار</span></div>
+
+          <div class="fg" id="fg17"><label>تقدير التكلفة الإجمالية <span class="req">*</span></label>
+            <input class="fi" id="f17" type="text" placeholder="مثال: 15,000 جنيه">
+            <span class="em" id="e17">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg full" id="fg18"><label>وصف المنزل والحالة الاجتماعية <span class="req">*</span></label>
+            <textarea class="fi" id="f18" rows="3" placeholder="مثال: منزل ريفي دور واحد، سقف من البوص..."></textarea>
+            <span class="em" id="e18">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg full" id="fg19"><label>التدخل المطلوب بالتفصيل <span class="req">*</span></label>
+            <textarea class="fi" id="f19" rows="3" placeholder="مثال: تنفيذ سقف خشبي لغرفتين..."></textarea>
+            <span class="em" id="e19">⚠ هذا الحقل إلزامي</span></div>
+
+          <div class="fg full" id="fg20"><label>وصف الحالة — نص نثري ملخص <span class="req">*</span></label>
+            <textarea class="fi" id="f20" rows="4" placeholder="مثال: أسرة مكونة من 5 أفراد..."></textarea>
+            <span class="em" id="e20">⚠ هذا الحقل إلزامي</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: المستندات -->
+    <div class="card">
+      <div class="ch"><span>📎</span><h3>المستندات والجاهزية</h3></div>
+      <div class="cb">
+        <div class="g2">
+          <div class="fg" id="fg21"><label>الأوراق ودراسات الحالة جاهزة؟ <span class="req">*</span></label>
+            <span class="hint">صورة البطاقة، شهادات الميلاد/الوفاة، بحث اجتماعي —
+              <a href="https://drive.google.com/file/d/1naKgUVIgBNDgWwxhiPfTMjt0y_khA4Nj/view" target="_blank" style="color:var(--teal)">تحميل النموذج</a></span>
+            <div class="rw" id="rw21" style="margin-top:8px">
+              <div class="rg">
+                <div class="ro"><input type="radio" name="docs" id="dy" value="نعم"><label for="dy">✅ نعم</label></div>
+                <div class="ro"><input type="radio" name="docs" id="dn" value="لا"><label for="dn">❌ لا</label></div>
+              </div>
+            </div>
+            <span class="em" id="e21">⚠ يرجى الإجابة</span></div>
+
+          <div class="fg" id="fg22"><label>المقايسات المالية جاهزة؟ <span class="req">*</span></label>
+            <span class="hint">موازنة تفصيلية للبنود —
+              <a href="https://drive.google.com/drive/folders/1j4apHc0ng5rH5JEz4e2NmOkJLqST4RBG" target="_blank" style="color:var(--teal)">تحميل النموذج</a></span>
+            <div class="rw" id="rw22" style="margin-top:8px">
+              <div class="rg">
+                <div class="ro"><input type="radio" name="quot" id="qy" value="نعم"><label for="qy">✅ نعم</label></div>
+                <div class="ro"><input type="radio" name="quot" id="qn" value="لا"><label for="qn">❌ لا</label></div>
+              </div>
+            </div>
+            <span class="em" id="e22">⚠ يرجى الإجابة</span></div>
+
+          <div class="fg" id="fg23"><label>يوجد صور وفيديو قبل التنفيذ؟ <span class="req">*</span></label>
+            <div class="rw" id="rw23" style="margin-top:8px">
+              <div class="rg">
+                <div class="ro"><input type="radio" name="photos" id="py" value="نعم"><label for="py">✅ نعم</label></div>
+                <div class="ro"><input type="radio" name="photos" id="pn" value="لا"><label for="pn">❌ لا</label></div>
+              </div>
+            </div>
+            <span class="em" id="e23">⚠ يرجى الإجابة</span></div>
+
+          <div class="fg"><label>لينك ملف الأوراق PDF على Drive <span style="color:var(--muted);font-weight:400">(اختياري)</span></label>
+            <input class="fi" id="f24" type="url" placeholder="https://drive.google.com/..." style="direction:ltr"></div>
+
+          <div class="fg"><label>لينك ملف المقايسة على Drive <span style="color:var(--muted);font-weight:400">(اختياري)</span></label>
+            <input class="fi" id="f25" type="url" placeholder="https://drive.google.com/..." style="direction:ltr"></div>
+
+          <div class="fg full"><label>لينك الموقع الجغرافي <span style="color:var(--muted);font-weight:400">(اختياري)</span></label>
+            <input class="fi" id="f26" type="text" placeholder="الصق لينك الموقع من واتساب أو خرائط جوجل" style="direction:ltr">
+            <span class="hint">📱 من واتساب: المرفقات ← الموقع ← إرسال موقعي الحالي ← انسخ الرابط</span></div>
+        </div>
+
+        <div class="sc">
+          <button type="submit" class="sb" id="sbtn">
+            <div class="sp" id="sp"></div>
+            <span id="stxt">📤 إرسال الاستمارة</span>
+          </button>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">سيتم الرد خلال 3-5 أيام عمل · info@reliefeg.org</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<footer>
+  <div class="fn">مؤسسة الإغاثة والطوارئ</div>
+  <p>رقم التسجيل: 638/2013 · القانون 149/2019 · المقطم، القاهرة</p>
+  <p style="margin-top:8px">📧 info@reliefeg.org · 📞 01068850770</p>
+</footer>
+
+<script>
+var URL = "https://script.google.com/macros/s/AKfycbweCdeCu_xWpFkZ3xTx2BAe-0hrVHLOP4gLVpRAYCnk6HyZnelDvW1YgM_Il8mMeISd/exec";
+
+// حقول إلزامية: [id_input, id_error, id_fg, type]
+// type: 'input' | 'select' | 'nid' | 'radio'
+var FLD = [
+  ['f1','e1','fg1','input'],
+  ['f2','e2','fg2','input'],
+  ['f3','e3','fg3','input'],
+  ['f4','e4','fg4','input'],
+  ['f5','e5','fg5','input'],
+  ['f6','e6','fg6','input'],
+  ['gender','e7','fg7','radio','rw7'],
+  ['f8','e8','fg8','select'],
+  ['f9','e9','fg9','nid'],
+  ['f10','e10','fg10','input'],
+  ['f11','e11','fg11','input'],
+  ['f12','e12','fg12','input'],
+  ['f13','e13','fg13','select'],
+  ['f14','e14','fg14','input'],
+  ['f15','e15','fg15','input'],
+  ['f16','e16','fg16','select'],
+  ['f17','e17','fg17','input'],
+  ['f18','e18','fg18','input'],
+  ['f19','e19','fg19','input'],
+  ['f20','e20','fg20','input'],
+  ['docs','e21','fg21','radio','rw21'],
+  ['quot','e22','fg22','radio','rw22'],
+  ['photos','e23','fg23','radio','rw23'],
+];
+
+function val(f){
+  if(f[3]==='radio'){var c=document.querySelector('input[name="'+f[0]+'"]:checked');return c?c.value:'';}
+  var el=document.getElementById(f[0]);
+  return el?el.value.trim():'';
+}
+function ok(f){
+  var v=val(f);
+  if(f[3]==='nid') return v.length===14&&/^\d+$/.test(v);
+  return v!=='';
+}
+function setErr(f,on){
+  document.getElementById(f[1]).classList[on?'add':'remove']('show');
+  document.getElementById(f[2]).classList[on?'add':'remove']('err');
+  if(f[3]==='radio'){document.getElementById(f[4]).classList[on?'add':'remove']('err');}
+  else{var el=document.getElementById(f[0]);if(el)el.classList[on?'add':'remove']('err');}
+}
+
+// مسح الخطأ عند التعديل
+FLD.forEach(function(f){
+  if(f[3]==='radio'){
+    document.querySelectorAll('input[name="'+f[0]+'"]').forEach(function(r){
+      r.addEventListener('change',function(){setErr(f,false);});
+    });
+  } else {
+    var el=document.getElementById(f[0]);
+    if(el){['input','change'].forEach(function(ev){el.addEventListener(ev,function(){setErr(f,false);});});}
   }
-}
+});
 
-function getGovCode(gov) {
-  var c = {
-    'القاهرة':'CAI','الجيزة':'GIZ','القليوبية':'QAL','الإسكندرية':'ALX',
-    'البحيرة':'BHR','الغربية':'GHR','كفر الشيخ':'KFS','المنوفية':'MNF',
-    'الدقهلية':'DKH','دمياط':'DMT','الشرقية':'SHR','بورسعيد':'PSD',
-    'الإسماعيلية':'ISM','السويس':'SUZ','شمال سيناء':'NSI','جنوب سيناء':'SSI',
-    'الفيوم':'FYM','بني سويف':'BNS','المنيا':'MNA','أسيوط':'AST',
-    'سوهاج':'SOH','قنا':'QNA','الأقصر':'LXR','أسوان':'ASW',
-    'مطروح':'MTR','الوادي الجديد':'WAD','البحر الأحمر':'RED'
+document.getElementById('frm').addEventListener('submit',function(e){
+  e.preventDefault();
+  document.getElementById('alW').style.display='none';
+  document.getElementById('alS').style.display='none';
+  document.getElementById('alE').style.display='none';
+
+  var errs=[];
+  FLD.forEach(function(f){var bad=!ok(f);setErr(f,bad);if(bad)errs.push(f);});
+
+  if(errs.length){
+    document.getElementById('alW').style.display='block';
+    var fe=errs[0];
+    var sc=fe[3]==='radio'?document.getElementById(fe[4]):document.getElementById(fe[0]);
+    if(sc)sc.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  var btn=document.getElementById('sbtn');
+  var sp=document.getElementById('sp');
+  var st=document.getElementById('stxt');
+  btn.disabled=true; sp.style.display='block'; st.textContent='جاري الإرسال...';
+
+  var data={
+    email:         document.getElementById('f1').value.trim(),   // B
+    partner:       document.getElementById('f2').value.trim(),   // C
+    coordinator:   document.getElementById('f3').value.trim(),   // D
+    coordPhone:    document.getElementById('f4').value.trim(),   // E
+    name:          document.getElementById('f5').value.trim(),   // F
+    spouse:        document.getElementById('f6').value.trim(),   // G
+    gender:        val(['gender','','','radio']),                  // H
+    socialStatus:  document.getElementById('f8').value,          // I
+    nid:           document.getElementById('f9').value.trim(),   // J
+    casePhone:     document.getElementById('f10').value.trim(),  // K
+    family:        document.getElementById('f11').value.trim(),  // L
+    work:          document.getElementById('f12').value.trim(),  // M
+    gov:           document.getElementById('f13').value,         // N
+    center:        document.getElementById('f14').value.trim(),  // O
+    village:       document.getElementById('f15').value.trim(),  // P
+    service:       document.getElementById('f16').value,         // Q
+    houseDesc:     document.getElementById('f18').value.trim(),  // R
+    intervention:  document.getElementById('f19').value.trim(),  // S
+    story:         document.getElementById('f20').value.trim(),  // T
+    budget:        document.getElementById('f17').value.trim(),  // U
+    docsReady:     val(['docs','','','radio']),                   // V
+    quotationReady:val(['quot','','','radio']),                   // W
+    photosReady:   val(['photos','','','radio']),                 // X
+    driveLink:     document.getElementById('f24').value.trim(),  // Y
+    quotationLink: document.getElementById('f25').value.trim(),  // Z
+    location:      document.getElementById('f26').value.trim(),  // AA
   };
-  return c[gov] || 'EGY';
-}
+
+  fetch(URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+  .then(function(){
+    document.getElementById('alS').style.display='block';
+    document.getElementById('frm').reset();
+    FLD.forEach(function(f){setErr(f,false);});
+    window.scrollTo({top:0,behavior:'smooth'});
+  })
+  .catch(function(){document.getElementById('alE').style.display='block';})
+  .finally(function(){btn.disabled=false;sp.style.display='none';st.textContent='📤 إرسال الاستمارة';});
+});
+</script>
+</body>
+</html>
